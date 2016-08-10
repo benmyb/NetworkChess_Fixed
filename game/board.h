@@ -31,7 +31,7 @@ struct node {
 	node() :m_pioneer(nullptr), m_next(nullptr), m_num(-1) {};
 	void setZero() {
 		m_pioneer = nullptr;
-		m_next = NULL;
+		m_next = nullptr;
 	}
 };
 

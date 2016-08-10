@@ -269,6 +269,7 @@ bool board::move_step(int x, int y) {
 	}
 }
 
+//移棋第三步：不想移棋
 bool board::move_cancel()
 {
 
@@ -353,6 +354,7 @@ bool board::lay(CHESS_COLOR color, int x, int y) {
 
 //收回棋子
 bool board::retract(CHESS_COLOR color, int x, int y) {
+	if (m_network[x][y][0].m_pioneer == NULL)return 0;
 	limit_retract(color, x, y);
 	// 在棋局链表中删除结点
 	for (int i = 0; i < 4; i++) {
@@ -361,19 +363,28 @@ bool board::retract(CHESS_COLOR color, int x, int y) {
 			m_network[x][y][i].m_next->m_pioneer = m_network[x][y][i].m_pioneer;
 		m_network[x][y][i].setZero();
 	}
+
+	return 1;
 }
 
 bool board::network_dfs(int index, int & total, CHESS_COLOR color) {
-	if (index) {	// pos >0 表示有棋子
+	if (index) {	// index >0 表示有棋子
 		int x = index % array_size;
 		int y = index / array_size;
+
+		// m_visited[x][y]=1 表示网络里面已经有这个棋子了
 		if (!judge_border(x, y) || m_visited[x][y])return 0;
 		//	if (m_visited[x][y])return 0;
+		// isfind =1 表示已经找到一个成功网络，可以直接返回
 		bool isfind(0);
+		// change by dyy at 8 10
+		// (x,y)位置上的棋子是不同色的
+		if ((m_curr_color[x][y] % 2) != color)return 0;
+
 		if (color == BLACK) {// 黑棋
-							 // x==1 有重复的棋子在特区，
+			// y==1 有重复的棋子在特区，
 			if (total&&y == 1)return 0;
-			if ((m_curr_color[x][y] % 2) == WHITE)return 0;
+			//if ((m_curr_color[x][y] % 2) == WHITE)return 0;
 			if (y == board_size) {
 				if (total >= chess_need_to_win - 1) {
 					isfind = 1;
@@ -383,30 +394,26 @@ bool board::network_dfs(int index, int & total, CHESS_COLOR color) {
 		}
 		else {
 			if (total&&x == 1)return 0;
-			if ((m_curr_color[x][y] % 2) == BLACK)return 0;
+		//	if ((m_curr_color[x][y] % 2) == BLACK)return 0;
 			if (x == board_size) {
 				if (total >= chess_need_to_win - 1) {
 					isfind = 1;
 				}
 				else return 0;
 			}
-			/*		if (!(m_situation[x][y] % 2) && !m_visited[x][y] && y != 1)
-			{
-			if (total >= m_success_chess_num&&y == m_n) {
-			isfind = 1;
-
-			}
-			}*/
 		}
 		m_visited[x][y] = 1;
 		total++;
 		m_success.push(index);
 		if (isfind)return 1;
+
 		for (int i(0); i < 4; ++i) {
 			// 注意判断指针非空，
-			if (m_network[x][y][i].m_pioneer != NULL)
+			// change by dyy 8 10
+			//if (m_network[x][y][i].m_pioneer != NULL)
 				isfind = network_dfs(m_network[x][y][i].m_pioneer->m_index, total, color);
 			if (isfind)return 1;
+			// 注意判断指针非空，
 			if (m_network[x][y][i].m_next != NULL)
 				isfind = network_dfs(m_network[x][y][i].m_next->m_index, total, color);
 			if (isfind)return 1;
