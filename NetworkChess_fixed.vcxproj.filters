@@ -2,10 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\ofApp.cpp">
-      <Filter>UI</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>UI</Filter>
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.cpp">
       <Filter>addons\ofxAssimpModelLoader\src</Filter>
@@ -172,14 +178,13 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
-    <ClCompile Include="game\board.cpp">
-      <Filter>game\board</Filter>
-    </ClCompile>
-    <ClCompile Include="game\manager.cpp">
-      <Filter>game\manager</Filter>
-    </ClCompile>
+    <ClCompile Include="game\board.cpp" />
+    <ClCompile Include="game\manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
     <Filter Include="addons">
       <UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
     </Filter>
@@ -234,31 +239,16 @@
     <Filter Include="addons\ofxXmlSettings\libs">
       <UniqueIdentifier>{687714A8-1662-FA1C-261F-50F0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game">
-      <UniqueIdentifier>{7bbd3881-bdd7-4ad0-aa9d-8b98e154337f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game\board">
-      <UniqueIdentifier>{aa90a7df-bc90-41f6-8612-f1619e971254}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game\player">
-      <UniqueIdentifier>{464f2083-77fe-4b0d-8362-b9c04bbc3871}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game\manager">
-      <UniqueIdentifier>{0f5a0425-4558-4ca9-b3a1-dcd996cf08ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game\tree">
-      <UniqueIdentifier>{9c7e66e5-f12e-49e9-9e65-d89ead352286}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game\judge">
-      <UniqueIdentifier>{1d27f3f3-4975-4963-bdca-c2a696dac54f}</UniqueIdentifier>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{50bc1610-2aba-47b8-9c88-dd391ae914f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
-      <Filter>UI</Filter>
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.h">
       <Filter>addons\ofxAssimpModelLoader\src</Filter>
@@ -548,15 +538,9 @@
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClInclude>
-    <ClInclude Include="game\board.h">
-      <Filter>game\board</Filter>
-    </ClInclude>
-    <ClInclude Include="game\manager.h">
-      <Filter>game\manager</Filter>
-    </ClInclude>
-    <ClInclude Include="game\player.h">
-      <Filter>game\player</Filter>
-    </ClInclude>
+    <ClInclude Include="game\board.h" />
+    <ClInclude Include="game\manager.h" />
+    <ClInclude Include="game\player.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

@@ -10,7 +10,7 @@
 #include <string>
 using namespace std;
 
-const int board_size = 10;	// 棋局大小
+const int board_size = 8;	// 棋局大小
 const int array_size = 10;	// 棋盘大小,扩大棋盘大小防止越界,减少越界判断
 const int dir_count = 8;	// 8方向联通
 const int chess_num = 10;	// 一方的棋子数
@@ -31,7 +31,7 @@ struct node {
 	node() :m_pioneer(nullptr), m_next(nullptr), m_num(-1) {};
 	void setZero() {
 		m_pioneer = nullptr;
-		m_next = nullptr;
+		m_next = NULL;
 	}
 };
 
@@ -65,9 +65,9 @@ public:
 	void init_link();
 	void init_line_head(int x, int y, int direction);
 	bool feasible(CHESS_COLOR color, int x, int y);
-	//放下棋子后在周围8个点（包括自己的位置）+1
+	//放下棋子后在周围8个点，自己的位置+m_inf2
 	void limit_lay(CHESS_COLOR color, int x, int y);	
-	//拿走棋子后在周围8个点（包括自己的位置）-1
+	//拿走棋子后在周围8个点，自己的位置-m_inf2
 	void limit_retract(CHESS_COLOR color, int x, int y);
 	bool judge_border(int x, int y) {	//判断是否越界
 		return (x >= 1 && x <= board_size && y >= 1 && y <= board_size);
