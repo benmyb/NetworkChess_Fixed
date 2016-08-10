@@ -13,12 +13,12 @@ void manager::restart() {
 
 void manager::step(int x, int y) {
 	if (white_is_first) {
-		if (who_step % 2)m_board.step(WHITE, x, y);
+		if (who_step % 2 == WHITE)m_board.step(WHITE, x, y);
 		else m_board.step(BLACK, x, y);
 		++who_step;
 	}
 	else {
-		if (who_step % 2)m_board.step(BLACK, x, y);
+		if (who_step % 2 == BLACK)m_board.step(BLACK, x, y);
 		else m_board.step(WHITE, x, y);
 		++who_step;
 	}
@@ -27,11 +27,11 @@ void manager::step(int x, int y) {
 void manager::select(int x, int y) {
 	m_board.move_select(x, y);
 	if (white_is_first) {
-		if (who_step % 2)moving_color = WHITE;
+		if (who_step % 2 == WHITE)moving_color = WHITE;
 		else moving_color = BLACK;
 	}
 	else {
-		if (who_step % 2)moving_color = BLACK;
+		if (who_step % 2 == BLACK)moving_color = BLACK;
 		else moving_color = WHITE;
 	}
 }
