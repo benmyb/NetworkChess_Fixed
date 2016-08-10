@@ -112,7 +112,7 @@ void board::init_link() {
 
 void board::init_line_head(int x, int y, int direction) {
 	int count(0);	// 记录是第几个结点
-					//由于棋盘扩大了，把周边没有用的结点作为一些链表的空头结点，增加结点的利用率，不用动态结点，方便初始化
+	//由于棋盘扩大了，把周边没有用的结点作为一些链表的空头结点，增加结点的利用率，不用动态结点，方便初始化
 	node* head = &m_network[x][y][direction];
 	while (1) {
 		//根据方向数组，计算链表的下一个结点的位置，
@@ -147,7 +147,7 @@ bool board::feasible(CHESS_COLOR color, int x, int y) {
 	return true;
 }
 
-//放下棋子后在周围8个点（包括自己的位置）+1
+//放下棋子后在周围8个点 ，自己的位置+m_inf2
 void board::limit_lay(CHESS_COLOR color, int x, int y) {
 	// 便于群的判断， 放下一个棋子，就在它的周围limit 数组+1 ，它自己的位置加上一个特殊值 m_inf2
 
@@ -162,7 +162,7 @@ void board::limit_lay(CHESS_COLOR color, int x, int y) {
 	m_limit[color][x][y] += m_inf2;
 }
 
-//拿走棋子后在周围8个点（包括自己的位置）-1
+//拿走棋子后在周围8个点，自己的位置-m_inf2
 void board::limit_retract(CHESS_COLOR color, int x, int y) {
 	// 便于群的判断， 收回一个棋子，就在它的周围limit 数组-1 它自己的位置减去一个特殊值 m_inf2
 
