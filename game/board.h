@@ -55,6 +55,8 @@ public:
 	int m_chess_num = 0;	// 记录放在棋盘的棋子数
 	int pre_chess = -1;	// 前一颗棋子
 	int selected_chess = -1;	// 被选择移动的棋子
+	stack<int> m_success;//存储成功网络
+	bool m_visited[array_size][array_size];// 用于判断成功网络时 ，记录遍历过的点
 	CHESS_COLOR selected_color = NONE;
 	bool isSelected = false;
 public:
@@ -85,5 +87,12 @@ public:
 	bool lay(CHESS_COLOR color, int x, int y);
 	//收回棋子
 	bool retract(CHESS_COLOR color, int x, int y);
+	//网络深搜
+	bool network_dfs(int index, int & total, CHESS_COLOR color);
+	//判断成功网络是否存在
+	bool judge_success(int who_step, CHESS_COLOR color);
+
+	stack<int>& success() { return m_success; }
+	void success_clear() { while (!m_success.empty())m_success.pop(); }
 };
 #endif
