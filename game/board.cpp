@@ -45,12 +45,7 @@ board::board() {
 void board::init() {
 	memset(m_limit, 0, sizeof(m_limit));
 	m_chess_num = 0;
-	for (unsigned i(0); i < array_size; ++i) {
-		for (unsigned j(0); j < array_size; ++j) {
-			m_curr_color[i][j].color = NONE;
-			m_curr_color[i][j].num = -1;
-		}
-	}
+	memset(m_curr_color, 0, sizeof(m_curr_color));
 	// 设置特区
 	for (int i(1); i <= board_size; ++i) {
 		//黑棋不能走上下两行，白棋不能走左右两列
@@ -58,7 +53,7 @@ void board::init() {
 		m_limit[1][1][i] = m_limit[1][board_size][i] = m_limit[0][i][1] = m_limit[0][i][board_size] = m_inf;
 	}
 
-	m_curr_color[1][1].num = m_curr_color[1][board_size].num = m_curr_color[board_size][1].num = m_curr_color[board_size][board_size].num = m_inf;//设置禁区
+	m_curr_color[1][1] = m_curr_color[1][board_size] = m_curr_color[board_size][1] = m_curr_color[board_size][board_size] = m_inf;//设置禁区
 	m_chess_num = 0;	// 记录放在棋盘的棋子数
 	pre_chess = -1;	// 前一颗棋子
 	selected_chess = -1;	// 被选择移动的棋子
@@ -132,7 +127,7 @@ void board::init_line_head(int x, int y, int direction) {
 }
 
 bool board::feasible(CHESS_COLOR color, int x, int y) {
-	if (!judge_border(x, y) || m_curr_color[x][y].color || m_limit[color][x][y] >= m_inf)return false;
+	if (!judge_border(x, y) || m_curr_color[x][y] || m_limit[color][x][y] >= m_inf)return false;
 
 	//附近有2个棋子
 	if (m_limit[color][x][y] >= 2)return 0;
@@ -207,8 +202,7 @@ bool board::step(CHESS_COLOR color, int x, int y) {
 	}
 	if (lay(color, x, y)) {
 		m_chess[++m_chess_num] = data_xytoi(x, y);
-		m_curr_color[x][y].num = m_chess_num;
-		m_curr_color[x][y].color = color;
+		m_curr_color[x][y] = m_chess_num;
 		cout << c_color << "方在(" << x << ',' << y << ")下子" << endl;
 		pre_chess = data_xytoi(x, y);
 		return true;
@@ -221,14 +215,14 @@ bool board::step(CHESS_COLOR color, int x, int y) {
 
 //移棋第一步：选择要移动的棋子并删除它
 bool board::move_select(int x, int y) {
-	if (m_curr_color[x][y].color != NONE) {
+	if (m_curr_color[x][y]) {
 		string c_color;
-		switch (m_curr_color[x][y].color) {
+		switch (m_curr_color[x][y]%2) {
 		case WHITE:c_color = "白"; break;
 		case BLACK:c_color = "黑"; break;
 		default:c_color = "未知"; break;
 		}
-		selected_color = m_curr_color[x][y].color;
+		selected_color = static_cast<CHESS_COLOR>(m_curr_color[x][y] % 2);
 		selected_chess = data_xytoi(x, y);
 		isSelected = true;
 		retract(selected_color, x, y);
@@ -254,9 +248,8 @@ bool board::move_step(int x, int y) {
 		if (lay(selected_color, x, y)) {
 			int b_x(0), b_y(0);
 			data_itoxy(selected_chess, b_x, b_y);
-			m_chess[m_curr_color[b_x][b_y].num] = data_xytoi(x, y);
-			m_curr_color[x][y].num = m_curr_color[b_x][b_y].num;
-			m_curr_color[x][y].color = selected_color;
+			m_chess[m_curr_color[b_x][b_y]] = data_xytoi(x, y);
+			m_curr_color[x][y] = m_curr_color[b_x][b_y];
 			cout << c_color << "方把(" << b_x << ',' << b_y << ")移动到(" << x << ',' << y << ')' << endl;
 			isSelected = false;
 			pre_chess = data_xytoi(x, y);
@@ -281,24 +274,23 @@ bool board::back(bool mode, int p1, int p2) {
 	data_itoxy(p1, current_x, current_y);
 	int pre_x(0), pre_y(0);
 	data_itoxy(p2, pre_x, pre_y);
-	if (retract(m_curr_color[current_x][current_y].color, current_x, current_y)) {
+	if (retract(static_cast<CHESS_COLOR>(m_curr_color[current_x][current_y] % 2), current_x, current_y)) {
 		if (mode == 0) {	//下棋
-			m_curr_color[current_x][current_y].color = NONE;
-			m_curr_color[current_x][current_y].num = 0;
+			m_curr_color[current_x][current_y] = 0;
 			pre_chess = p2;
 			--m_chess_num;
 			return true;
 		}
 		else {	//移棋
-			m_curr_color[pre_x][pre_y].num = m_curr_color[current_x][current_y].num;
-			lay(m_curr_color[pre_x][pre_y].color, pre_x, pre_y);
+			m_curr_color[pre_x][pre_y] = m_curr_color[current_x][current_y];
+			lay(static_cast<CHESS_COLOR>(m_curr_color[pre_x][pre_y] % 2), pre_x, pre_y);
 			pre_chess = p2;
 			return true;
 		}
 	}
 	else {
 		string c_color;
-		switch (m_curr_color[current_x][current_y].color) {
+		switch (m_curr_color[current_x][current_y]%2) {
 		case WHITE:c_color = "白"; break;
 		case BLACK:c_color = "黑"; break;
 		case NONE:c_color = "没有颜"; break;
