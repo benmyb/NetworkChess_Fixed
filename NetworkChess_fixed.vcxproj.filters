@@ -178,8 +178,12 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
-    <ClCompile Include="game\board.cpp" />
-    <ClCompile Include="game\manager.cpp" />
+    <ClCompile Include="game\board.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\manager.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -239,7 +243,7 @@
     <Filter Include="addons\ofxXmlSettings\libs">
       <UniqueIdentifier>{687714A8-1662-FA1C-261F-50F0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NewFilter1">
+    <Filter Include="game">
       <UniqueIdentifier>{50bc1610-2aba-47b8-9c88-dd391ae914f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -538,9 +542,15 @@
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClInclude>
-    <ClInclude Include="game\board.h" />
-    <ClInclude Include="game\manager.h" />
-    <ClInclude Include="game\player.h" />
+    <ClInclude Include="game\board.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\manager.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\player.h">
+      <Filter>game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
