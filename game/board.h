@@ -19,12 +19,8 @@ const int m_inf = 0x3f3f3f3f;	// 设置无穷值，便于设置特殊值
 const int m_inf2 = 0x1f1f1f1f;	// 设置第二个特殊值，表示特殊情况
 //白棋连通上下  黑棋连通左右 
 
-enum CHESS_COLOR { NONE, WHITE, BLACK };
+enum CHESS_COLOR { WHITE, BLACK, NONE }; //%2==0白子，%2==1黑子
 
-struct chess {
-	CHESS_COLOR color = NONE;
-	int num = 0;
-};
 
 struct node {
 	node * m_pioneer = nullptr;
@@ -50,7 +46,7 @@ void real_itoxy(int i, int & x, int & y);
 
 class board {
 public:
-	chess m_curr_color[array_size][array_size];
+	int m_curr_color[array_size][array_size];
 	int m_limit[2][array_size][array_size];	// m_limit[0][][] 表示白棋的限制域， m_limit[1][][] 表示黑棋的限制域
 	int m_surround[dir_count][2] = { { -1,1 },{ 0,1 },{ 1,1 },{ 1,0 },{ -1,0 },{ -1,-1 },{ 0,-1 },{ 1,-1 } };	 //临近域
 	node m_network[array_size][array_size][4];	//每个棋子一个节点
