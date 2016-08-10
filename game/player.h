@@ -9,6 +9,7 @@ class player {
 private:
 	string m_name;
 	bool our_side = true;
+	bool is_human = true;
 	ofxAssimpModelLoader m_hand;
 	ofxAssimpModelLoader m_bowl;
 };
