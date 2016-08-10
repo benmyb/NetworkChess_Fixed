@@ -269,6 +269,33 @@ bool board::move_step(int x, int y) {
 	}
 }
 
+bool board::move_cancel()
+{
+
+	int x, y;
+
+	data_itoxy(selected_chess,x,y);
+
+	isSelected = false;
+	if (lay(selected_color, x, y)){
+		string c_color;
+		switch (selected_color) {
+		case WHITE:c_color = "白"; break;
+		case BLACK:c_color = "黑"; break;
+		case NONE:c_color = "没有颜"; break;
+		default:c_color = "未知"; break;
+		}
+
+		cout << c_color << "方把棋子放回到(" << x << ',' << y << ')' << endl;
+
+	}
+	else {
+		cout << "出错：不知道为什么放不回去棋子？？？内核有问题" << endl;
+	}
+
+	return false;
+}
+
 //悔棋，p1：现在坐标，p2=为前坐标;mode=0下棋，1移棋
 bool board::back(bool mode, int p1, int p2) {
 	int current_x(0), current_y(0);

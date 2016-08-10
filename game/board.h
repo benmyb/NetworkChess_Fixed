@@ -81,6 +81,8 @@ public:
 	bool move_select(int x, int y);
 	//移棋第二步：在新位置下棋
 	bool move_step(int x, int y);
+	//移棋第三步：不想移棋
+	bool move_cancel();
 	//悔棋，p1：现在坐标，p2=为前坐标;mode=0下棋，1移棋
 	bool back(bool mode, int p1, int p2);
 	//放下棋子
