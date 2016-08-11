@@ -7,18 +7,19 @@ void ofApp::setup(){
 	ofEnableDepthTest(); //Enable z-buffering
 	ofEnableSmoothing();
 	ofSetBackgroundAuto(true);
-	m_view.resize(5);
+	m_view.resize(6);
 	for (unsigned i(0); i < 5; ++i) {
 		m_cam.push_back(move(ofEasyCam()));
 	}
 	setupViewport();
 	setupCam();
 	m_text.loadFont("sans-serif", 21, true, true);
-	m_title.loadFont("AR DESTINE", 100, true, true);
+	m_title.loadFont("AR DESTINE", 80, true, true);
 	m_digtial.loadFont("Digital Dismay", 80, true, true);
 	int index1((rand() % 37) + 1), index2((rand() % 37) + 1);
 	m_face_top.loadImage("/faces/human/" + ofToString(index1) + ".jpg");
 	m_face_down.loadImage("/faces/human/" + ofToString(index2) + ".jpg");
+	mode_back.loadImage("mode_back.png");
 	m_face_top.resize(xOffset / 2, xOffset * 7 / 12);
 	m_face_down.resize(xOffset / 2, xOffset * 7 / 12);
 }
@@ -34,6 +35,7 @@ void ofApp::draw(){
 		drawMain();
 		drawTop();
 		drawDown();
+		drawMode();
 	}
 	else {
 		drawTree();
@@ -108,7 +110,7 @@ void ofApp::gotMessage(ofMessage msg){
 void ofApp::setupViewport() {
 	xOffset = ofGetWidth() / 4;
 	if (!m_isTreeView) {
-		yOffset = ofGetHeight() / 2;
+		yOffset = ofGetHeight() / 2 - 50;
 
 		m_view[MainView].x = 0;
 		m_view[MainView].y = 0;
@@ -120,8 +122,13 @@ void ofApp::setupViewport() {
 		m_view[TopView].width = xOffset;
 		m_view[TopView].height = yOffset;
 
+		m_view[ModeView].x = xOffset * 3;
+		m_view[ModeView].y = yOffset;
+		m_view[ModeView].width = xOffset;
+		m_view[ModeView].height = 100;
+
 		m_view[DownView].x = xOffset * 3;
-		m_view[DownView].y = yOffset;
+		m_view[DownView].y = yOffset+100;
 		m_view[DownView].width = xOffset;
 		m_view[DownView].height = yOffset;
 	}
@@ -173,6 +180,7 @@ void ofApp::drawViewportOutline() {
 		ofRect(m_view[MainView]);
 		ofRect(m_view[TopView]);
 		ofRect(m_view[DownView]);
+		ofRect(m_view[ModeView]);
 	}
 	else {
 		ofRect(m_view[TreeView]);
@@ -211,7 +219,7 @@ void ofApp::drawTop() {
 	ofSetColor(0, 0, 0);
 	m_text.drawString(ss.str(), 10, 25);
 	se <<setw(2) << setfill('0') << setiosflags(ios::right)<< 60 - (static_cast<int>(ofGetElapsedTimef()));
-	m_digtial.drawString(se.str(), xOffset / 2 - 40, yOffset - m_face_down.getHeight() + 40);
+	m_digtial.drawString(se.str(), xOffset / 2 - 40, yOffset - 40);
 	ofSetColor(255, 255, 255);
 	m_face_top.draw(xOffset - m_face_top.getWidth() - 20, 20, 0);
 	ofPopView();
@@ -226,9 +234,22 @@ void ofApp::drawDown() {
 	ofSetColor(0, 0, 0);
 	m_text.drawString(ss.str(), 10, yOffset-10);
 	se << setw(2) << setfill('0') << setiosflags(ios::right) << 60 - (static_cast<int>(ofGetElapsedTimef()));
-	m_digtial.drawString(se.str(), xOffset / 2 - 40, yOffset - m_face_down.getHeight() - 60);
+	m_digtial.drawString(se.str(), xOffset / 2 - 40, 100);
 	ofSetColor(255, 255, 255);
 	m_face_down.draw(xOffset- m_face_down.getWidth() -20, yOffset- m_face_down.getHeight() -20, 0);
+	ofPopView();
+}
+
+void ofApp::drawMode() {
+	ofPushView();
+	ofViewport(m_view[ModeView]);
+	ofSetupScreen();
+	mode_back.draw(0, 0, -1);
+	string ss;
+	ofSetColor(205, 10, 100);
+	ss = "STEP";
+	m_title.drawString(ss, 2, 90);
+	ofSetColor(255, 255, 255);
 	ofPopView();
 }
 

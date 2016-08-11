@@ -4,7 +4,7 @@
 #include "ofxUI.h"
 #include "../game/manager.h"
 
-enum MyView { MainView, TopView, DownView, TreeView, BoardView };
+enum MyView { MainView, TopView, DownView, TreeView, BoardView, ModeView };
 
 class ofApp : public ofBaseApp{
 
@@ -32,6 +32,7 @@ class ofApp : public ofBaseApp{
 		void drawMain();
 		void drawTop();
 		void drawDown();
+		void drawMode();
 		void drawTree();
 		void drawBoard();
 private:
@@ -43,6 +44,7 @@ private:
 		ofLight m_light;
 		unique_ptr<ofxUISuperCanvas> m_UIMain, m_UISetting, m_UITree;
 		ofTrueTypeFont m_title, m_text, m_digtial;
+		ofImage mode_back;
 		bool m_isTreeView = false;
 
 		//test
