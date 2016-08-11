@@ -13,8 +13,9 @@ void ofApp::setup(){
 	}
 	setupViewport();
 	setupCam();
-	m_normal.loadFont("sans-serif", 21, true, true);
-	m_title.loadFont("sans-serif", 42, true, true);
+	m_text.loadFont("sans-serif", 21, true, true);
+	m_title.loadFont("AR DESTINE", 100, true, true);
+	m_digtial.loadFont("Digital Dismay", 80, true, true);
 	int index1((rand() % 37) + 1), index2((rand() % 37) + 1);
 	m_face_top.loadImage("/faces/human/" + ofToString(index1) + ".jpg");
 	m_face_down.loadImage("/faces/human/" + ofToString(index2) + ".jpg");
@@ -194,9 +195,9 @@ void ofApp::drawMain() {
 	ofViewport(m_view[MainView]);
 	ofSetupScreen();
 	stringstream ss;
-	ss << 60 - (static_cast<int>(ofGetElapsedTimef()) % 60);
+	ss << "Main viewport";
 	ofSetColor(0, 0, 0);
-	m_normal.drawString(ss.str(), 5, 25);
+	m_title.drawString(ss.str(), 5, 105);
 	ofSetColor(255, 255, 255);
 	ofPopView();
 }
@@ -205,10 +206,12 @@ void ofApp::drawTop() {
 	ofPushView();
 	ofViewport(m_view[TopView]);
 	ofSetupScreen();
-	stringstream ss;
+	stringstream ss,se;
 	ss << "Ben";
 	ofSetColor(0, 0, 0);
-	m_normal.drawString(ss.str(), 10, 25);
+	m_text.drawString(ss.str(), 10, 25);
+	se <<setw(2) << setfill('0') << setiosflags(ios::right)<< 60 - (static_cast<int>(ofGetElapsedTimef()));
+	m_digtial.drawString(se.str(), xOffset / 2 - 40, yOffset - m_face_down.getHeight() + 40);
 	ofSetColor(255, 255, 255);
 	m_face_top.draw(xOffset - m_face_top.getWidth() - 20, 20, 0);
 	ofPopView();
@@ -218,10 +221,12 @@ void ofApp::drawDown() {
 	ofPushView();
 	ofViewport(m_view[DownView]);
 	ofSetupScreen();
-	stringstream ss;
+	stringstream ss, se;
 	ss << "Daisy";
 	ofSetColor(0, 0, 0);
-	m_normal.drawString(ss.str(), 10, yOffset-10);
+	m_text.drawString(ss.str(), 10, yOffset-10);
+	se << setw(2) << setfill('0') << setiosflags(ios::right) << 60 - (static_cast<int>(ofGetElapsedTimef()));
+	m_digtial.drawString(se.str(), xOffset / 2 - 40, yOffset - m_face_down.getHeight() - 60);
 	ofSetColor(255, 255, 255);
 	m_face_down.draw(xOffset- m_face_down.getWidth() -20, yOffset- m_face_down.getHeight() -20, 0);
 	ofPopView();
@@ -239,7 +244,7 @@ void ofApp::drawTree() {
 	stringstream ss;
 	ss << "Tree Viewport";
 	ofSetColor(0, 0, 0);
-	m_normal.drawString(ss.str(), 5, 25);
+	m_text.drawString(ss.str(), 5, 25);
 	ofPopView();
 }
 

@@ -42,7 +42,7 @@ private:
 		ofMesh treeMesh;
 		ofLight m_light;
 		unique_ptr<ofxUISuperCanvas> m_UIMain, m_UISetting, m_UITree;
-		ofTrueTypeFont m_title, m_normal;
+		ofTrueTypeFont m_title, m_text, m_digtial;
 		bool m_isTreeView = false;
 
 		//test
