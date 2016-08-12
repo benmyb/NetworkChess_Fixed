@@ -102,5 +102,9 @@ public:
 	// 某一位为1 表示可以下棋，否则不能下 大小为 0-63
 	unsigned long  get_all_feasible(CHESS_COLOR color);
 
+	
+
+	
+
 };
 #endif

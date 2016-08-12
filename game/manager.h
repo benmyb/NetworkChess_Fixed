@@ -26,6 +26,9 @@ public:
 	bool judge_success(CHESS_COLOR color);
 	void move_cancel();
 
+	bool who_turn() {
+		return 
+	}
 
 };
 
