@@ -16,6 +16,11 @@ private:
 	ofxAssimpModelLoader m_bowl;
 	unsigned m_wins = 0;
 	unsigned m_loses = 0;
+	
+
+public:
+	//virtual void step()=0;
+
 
 };
 

@@ -255,6 +255,9 @@
     <Filter Include="resource\faces\human">
       <UniqueIdentifier>{8f9e8933-b689-46c5-a663-7043c15b765b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resource\back">
+      <UniqueIdentifier>{17bce8cb-ad89-45c3-b91f-2ce76a13fb8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
@@ -560,9 +563,6 @@
     <ClInclude Include="game\player.h">
       <Filter>game</Filter>
     </ClInclude>
-    <ClInclude Include="game\judge.h">
-      <Filter>game</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
@@ -681,6 +681,282 @@
     </Image>
     <Image Include="bin\data\mode_back.png">
       <Filter>resource</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (1).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (2).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (3).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (4).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (5).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (6).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (7).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (8).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (9).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (10).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (11).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (12).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (13).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (14).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (15).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (16).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (17).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (18).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (19).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (20).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (21).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (22).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (23).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (24).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (25).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (26).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (27).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (28).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (29).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (30).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (31).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (32).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (33).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (34).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (35).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (36).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (37).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (38).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (39).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (40).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (41).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (42).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (43).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (44).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (45).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (46).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (47).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (48).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (49).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (50).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (51).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (52).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (53).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (54).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (55).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (56).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (57).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (58).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (59).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (60).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (61).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (62).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (63).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (64).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (65).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (66).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (67).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (68).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (69).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (70).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (71).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (72).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (73).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (74).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (75).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (76).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (77).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (78).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (79).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (80).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (81).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (82).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (83).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (84).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (85).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (86).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (87).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (88).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (89).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (90).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (91).jpg">
+      <Filter>resource\back</Filter>
+    </Image>
+    <Image Include="bin\data\back\back (92).jpg">
+      <Filter>resource\back</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

@@ -458,3 +458,42 @@ bool board::judge_success(int who_step, CHESS_COLOR color) {
 	return false;
 }
 
+// 某一位为1 表示可以下棋，否则不能下
+unsigned long board::get_all_feasible(CHESS_COLOR color)
+{
+
+	bool current_feasible[array_size][array_size];
+	memset(current_feasible, 0, sizeof(current_feasible));
+
+	int temp_x, temp_y;
+	for (int i = 1; i <= m_chess_num; i++) {// O(m_chess_num)=O(20)
+		data_itoxy(i, temp_x, temp_y);
+		current_feasible[temp_x][temp_y] = 1;// 已经有棋子的地方不能下
+		if (i % 2==color) {
+			
+			if (m_limit[color][temp_x][temp_y] == m_inf2 + 1) {//这个棋子附近有一个同色棋子，附近不可以再下同色棋子
+				for (int j = 0; j < 4; j++)
+				{
+					current_feasible[temp_x + m_surround[j][0]][temp_x + m_surround[j][1]] = 1;
+
+				}
+			}
+		}
+		
+	}
+
+	unsigned long ans = 0;
+	for (int y = board_size; y >=1; y--) {
+		for (int x = board_size; x >= 1; x--)
+		{
+			ans >>= 1;
+			if (!current_feasible[x][y] && m_limit[color][x][y] <= 1) {
+				ans |= 1;
+			}
+		}
+	}
+	
+	return ans;
+}
+
+

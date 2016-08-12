@@ -16,11 +16,14 @@ public:
 	void restart();
 	void step(int x, int y);
 	void select(int x, int y);
-	void move_step(int x, int y);
+	//移棋到的位置，如果能够移动就返回1
+	bool move_step(int x, int y);
+	void move_back(int x, int y);
+
 	void back(bool mode);
 	bool judge_success(CHESS_COLOR color);
-
 	void move_cancel();
+
 
 };
 
