@@ -46,6 +46,8 @@ void real_itoxy(int i, int & x, int & y);
 
 class board {
 public:
+	// ==0 表示没有棋子,%2=0表示白棋 %2=1表示黑棋,==m_inf禁区
+	// >0 表示这个棋子放置在m_chess的下标
 	int m_curr_color[array_size][array_size];
 	int m_limit[2][array_size][array_size];	// m_limit[0][][] 表示白棋的限制域， m_limit[1][][] 表示黑棋的限制域
 	int m_surround[dir_count][2] = { { -1,1 },{ 0,1 },{ 1,1 },{ 1,0 },{ -1,0 },{ -1,-1 },{ 0,-1 },{ 1,-1 } };	 //临近域
@@ -96,5 +98,9 @@ public:
 
 	stack<int>& success() { return m_success; }
 	void success_clear() { while (!m_success.empty())m_success.pop(); }
+
+	// 某一位为1 表示可以下棋，否则不能下 大小为 0-63
+	unsigned long  get_all_feasible(CHESS_COLOR color);
+
 };
 #endif

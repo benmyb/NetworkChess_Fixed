@@ -184,6 +184,9 @@
     <ClCompile Include="game\manager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="game\game.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -546,6 +549,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="game\player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
