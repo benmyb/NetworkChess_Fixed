@@ -40,8 +40,7 @@ bool manager::move_step(int x, int y) {
 	return m_board.move_step(x, y);
 }
 
-void manager::move_back(int x, int y)
-{
+void manager::move_back(int x, int y){
 	
 }
 
@@ -74,4 +73,8 @@ void manager::move_cancel()
 {
 	m_board.move_cancel();
 
+}
+
+unsigned long manager::available(CHESS_COLOR color) {
+	return m_board.get_all_feasible(color);
 }
