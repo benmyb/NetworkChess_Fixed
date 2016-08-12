@@ -1,6 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxUI.h"
+#include "../game/manager.h"
+
+enum MyView { MainView, TopView, DownView, TreeView, BoardView, ModeView };
 
 class ofApp : public ofBaseApp{
 
@@ -20,5 +24,31 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+		void setupViewport();
+		void setupCam();
+		void setupUI();
+		void drawViewportOutline();
+		void drawMain();
+		void drawTop();
+		void drawDown();
+		void drawMode();
+		void drawTree();
+		void drawBoard();
+private:
+		float xOffset;
+		float yOffset;
+		vector<ofRectangle> m_view;
+		vector<ofEasyCam> m_cam;
+		ofMesh treeMesh;
+		ofLight m_light;
+		unique_ptr<ofxUISuperCanvas> m_UIMain, m_UISetting, m_UITree;
+		ofTrueTypeFont m_title, m_text, m_digtial;
+		ofImage mode_back;
+		bool m_isTreeView = false;
+
+		//test
+		ofImage m_face_top, m_face_down;
+		bool m_isTiming = true;
 		
 };
