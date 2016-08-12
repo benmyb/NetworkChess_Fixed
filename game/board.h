@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
+#include<limits>
 using namespace std;
 
 const int board_size = 8;	// 棋局大小
@@ -17,6 +18,8 @@ const int chess_num = 10;	// 一方的棋子数
 const int chess_need_to_win = 6;//成功网络中所需棋子数
 const int m_inf = 0x3f3f3f3f;	// 设置无穷值，便于设置特殊值
 const int m_inf2 = 0x1f1f1f1f;	// 设置第二个特殊值，表示特殊情况
+
+const double double_inf = 1e9 + 10;
 //白棋连通上下  黑棋连通左右 
 
 enum CHESS_COLOR { WHITE, BLACK, NONE }; //%2==0白子，%2==1黑子
@@ -102,8 +105,13 @@ public:
 	// 某一位为1 表示可以下棋，否则不能下 大小为 0-63
 	unsigned long  get_all_feasible(CHESS_COLOR color);
 
-	
 
+	pair<unsigned long, unsigned long> get_current_state();
+
+
+	// 简单计算每个点周围的可见点数目 
+	int  get_scores(CHESS_COLOR color);
+	
 	
 
 };

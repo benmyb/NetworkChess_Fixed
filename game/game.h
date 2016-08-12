@@ -1,5 +1,5 @@
 #pragma once
-#include "manager.h"
+
 #include "human.h"
 #include "computer.h"
 

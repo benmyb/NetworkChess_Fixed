@@ -3,8 +3,7 @@
 #define PLAYER_H
 
 #include "ofxAssimpModelLoader.h"
-#include "board.h"
-
+#include "manager.h"
 class player {
 protected:
 	string m_name;

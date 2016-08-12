@@ -2,7 +2,7 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include "player.h"
+#include "board.h"
 
 class manager {
 private:
@@ -28,6 +28,17 @@ public:
 	unsigned long  available(CHESS_COLOR color);
 	int getstep() { return who_step; }
 	int getprechess() { return m_board.pre_chess; }
+
+	int get_scores(CHESS_COLOR color) {
+		return m_board.get_scores(color);
+	}
+
+	
+	pair<unsigned long int, unsigned long int> get_state() {
+		return m_board.get_current_state();
+	}
+
+	bool get_mode() { return who_step >= 2 * chess_num; };
 };
 
 

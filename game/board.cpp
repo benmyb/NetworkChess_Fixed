@@ -251,6 +251,7 @@ bool board::move_step(int x, int y) {
 			data_itoxy(selected_chess, b_x, b_y);
 			m_chess[m_curr_color[b_x][b_y]] = data_xytoi(x, y);
 			m_curr_color[x][y] = m_curr_color[b_x][b_y];
+			m_curr_color[b_x][b_y] = 0;
 			cout << c_color << "方把(" << b_x << ',' << b_y << ")移动到(" << x << ',' << y << ')' << endl;
 			isSelected = false;
 			pre_chess = data_xytoi(x, y);
@@ -312,6 +313,7 @@ bool board::back(bool mode, int p1, int p2) {
 		}
 		else {	//移棋
 			m_curr_color[pre_x][pre_y] = m_curr_color[current_x][current_y];
+			m_curr_color[current_x][current_y] = 0;
 			lay(static_cast<CHESS_COLOR>(m_curr_color[pre_x][pre_y] % 2), pre_x, pre_y);
 			pre_chess = p2;
 			return true;
@@ -494,6 +496,49 @@ unsigned long board::get_all_feasible(CHESS_COLOR color)
 	}
 	
 	return ans;
+}
+pair<unsigned long, unsigned long> board::get_current_state()
+{
+	unsigned long temp_state(0), temp_color(0);
+	int temp;
+	for (int i = 1; i <= m_chess_num; i++) {
+		temp = data2real(m_chess[i]);
+		temp_state |= (1 << temp);
+		if (i % 2) {
+			temp_color |= (1 << temp);
+		}
+	}
+
+	
+	return pair<unsigned long, unsigned long>(temp_state,temp_color);
+}
+// 简单计算每个点周围的可见点数目
+int board::get_scores(CHESS_COLOR color)
+{
+	int scores[2];
+	int temp, x, y;
+	int total_next;
+	for (int i = 1; i <=chess_num; i++) {
+		temp = m_chess[i];
+		data_itoxy(temp, x, y);
+		temp = 0;
+		total_next = 0;
+		int x1, y1;
+		for (int i = 0; i < 4; i++)
+		{
+			temp = m_network[x][y][i].m_pioneer->m_index;
+			data_itoxy(temp, x1, y1);
+			if (m_curr_color[x1][y1] < m_inf && (m_curr_color[x1][y1] % 2) == (m_curr_color[x][y] % 2)) {
+				total_next++;
+			}
+		}
+
+		scores[m_curr_color[x][y] % 2] += total_next;
+	}
+
+	return scores[color] - scores[(color + 1) % 2];
+
+	//return 0;
 }
 
 
