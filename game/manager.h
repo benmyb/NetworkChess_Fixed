@@ -4,8 +4,6 @@
 
 #include "player.h"
 
-
-int change = 99;
 class manager {
 private:
 	board m_board;

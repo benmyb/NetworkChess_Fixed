@@ -48,7 +48,7 @@ private:
 		bool m_isTreeView = false;
 
 		//test
-		ofImage m_face_top, m_face_down;
+		ofImage m_face_top, m_face_down, m_back_top, m_back_down;
 		bool m_isTiming = true;
 		
 };

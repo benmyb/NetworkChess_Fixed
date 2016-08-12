@@ -560,6 +560,9 @@
     <ClInclude Include="game\player.h">
       <Filter>game</Filter>
     </ClInclude>
+    <ClInclude Include="game\judge.h">
+      <Filter>game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

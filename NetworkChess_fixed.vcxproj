@@ -233,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\board.h" />
+    <ClInclude Include="game\judge.h" />
     <ClInclude Include="game\manager.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="src\ofApp.h" />
