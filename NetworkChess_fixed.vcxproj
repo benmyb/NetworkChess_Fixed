@@ -172,6 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game\board.cpp" />
+    <ClCompile Include="game\game.cpp" />
     <ClCompile Include="game\manager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -233,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\board.h" />
+    <ClInclude Include="game\game.h" />
     <ClInclude Include="game\manager.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="src\ofApp.h" />

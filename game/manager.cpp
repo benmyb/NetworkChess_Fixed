@@ -36,8 +36,13 @@ void manager::select(int x, int y) {
 	}
 }
 
-void manager::move_step(int x, int y) {
-	m_board.move_step(x, y);
+bool manager::move_step(int x, int y) {
+	return m_board.move_step(x, y);
+}
+
+void manager::move_back(int x, int y)
+{
+	
 }
 
 void manager::back(bool mode) {
