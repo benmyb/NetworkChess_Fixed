@@ -64,3 +64,9 @@ bool manager::judge_success(CHESS_COLOR color) {
 	if (m_board.judge_success(who_step, color))return true;
 	else return false;
 }
+
+void manager::move_cancel()
+{
+	m_board.move_cancel();
+
+}

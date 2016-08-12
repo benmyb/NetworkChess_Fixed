@@ -179,10 +179,10 @@
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
     <ClCompile Include="game\board.cpp">
-      <Filter>game</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="game\manager.cpp">
-      <Filter>game</Filter>
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +242,6 @@
     </Filter>
     <Filter Include="addons\ofxXmlSettings\libs">
       <UniqueIdentifier>{687714A8-1662-FA1C-261F-50F0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="game">
-      <UniqueIdentifier>{50bc1610-2aba-47b8-9c88-dd391ae914f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -543,13 +540,13 @@
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClInclude>
     <ClInclude Include="game\board.h">
-      <Filter>game</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="game\manager.h">
-      <Filter>game</Filter>
+      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="game\player.h">
-      <Filter>game</Filter>
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,8 @@
 
 #include "player.h"
 
+
+int change = 99;
 class manager {
 private:
 	board m_board;
@@ -19,6 +21,9 @@ public:
 	void move_step(int x, int y);
 	void back(bool mode);
 	bool judge_success(CHESS_COLOR color);
+
+	void move_cancel();
+
 };
 
 

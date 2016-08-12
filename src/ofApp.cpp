@@ -14,8 +14,8 @@ void ofApp::setup(){
 	setupViewport();
 	setupCam();
 	m_text.loadFont("sans-serif", 21, true, true);
-	m_title.loadFont("/ARDESTINE.ttf", 80, true, true);
-	m_digtial.loadFont("/Digital Dismay.otf", 80, true, true);
+	m_title.loadFont("AR DESTINE", 80, true, true);
+	m_digtial.loadFont("Digital Dismay", 80, true, true);
 	int index1((rand() % 37) + 1), index2((rand() % 37) + 1);
 	m_face_top.loadImage("/faces/human/" + ofToString(index1) + ".jpg");
 	m_face_down.loadImage("/faces/human/" + ofToString(index2) + ".jpg");
