@@ -172,7 +172,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game\board.cpp" />
+    <ClCompile Include="game\computer.cpp" />
     <ClCompile Include="game\manager.cpp" />
+    <ClCompile Include="game\player.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="..\..\..\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.cpp" />
@@ -233,6 +235,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\board.h" />
+    <ClInclude Include="game\computer.h" />
+    <ClInclude Include="game\game.h" />
+    <ClInclude Include="game\human.h" />
     <ClInclude Include="game\manager.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="src\ofApp.h" />

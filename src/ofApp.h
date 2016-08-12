@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxUI.h"
-#include "../game/manager.h"
+#include "../game/game.h"
 
 enum MyView { MainView, TopView, DownView, TreeView, BoardView, ModeView };
 
@@ -35,6 +35,7 @@ class ofApp : public ofBaseApp{
 		void drawMode();
 		void drawTree();
 		void drawBoard();
+		void drawStage();
 private:
 		float xOffset;
 		float yOffset;
@@ -46,6 +47,20 @@ private:
 		ofTrueTypeFont m_title, m_text, m_digtial;
 		ofImage mode_back;
 		bool m_isTreeView = false;
+
+		ofImage m_chessboard_jpg;
+		ofImage wood;
+		ofImage wood_bowl;
+		ofImage skin;
+		ofImage white_chess;
+		ofImage black_chess;
+		ofLight up_light;
+		ofLight down_light;
+		ofLight on_light;
+		ofLight other_light;
+		ofPolyline success_path;
+		vector<ofSpherePrimitive> chess;
+		game m_game;
 
 		//test
 		ofImage m_face_top, m_face_down, m_back_top, m_back_down;

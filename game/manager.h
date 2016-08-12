@@ -24,7 +24,10 @@ public:
 	bool judge_success(CHESS_COLOR color);
 	void move_cancel();
 
-
+	int* chess_on_board() { return m_board.m_chess; }
+	unsigned long  available(CHESS_COLOR color);
+	int getstep() { return who_step; }
+	int getprechess() { return m_board.pre_chess; }
 };
 
 

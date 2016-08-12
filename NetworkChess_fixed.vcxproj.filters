@@ -184,6 +184,12 @@
     <ClCompile Include="game\manager.cpp">
       <Filter>game</Filter>
     </ClCompile>
+    <ClCompile Include="game\player.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\computer.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -561,6 +567,15 @@
       <Filter>game</Filter>
     </ClInclude>
     <ClInclude Include="game\player.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\human.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="game\computer.h">
       <Filter>game</Filter>
     </ClInclude>
   </ItemGroup>
