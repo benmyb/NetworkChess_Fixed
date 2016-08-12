@@ -48,11 +48,8 @@ void ofApp::setup(){
 	m_text.loadFont("sans-serif", 21, true, true, true);
 	m_title.loadFont("/ARDESTINE.ttf", 80, true, true, true);
 	m_digtial.loadFont("/Digital Dismay.otf", 80, true, true, true);
-	int index1((rand() % 37) + 1), index2((rand() % 37) + 1);
-	m_face_top.loadImage("/faces/human/" + ofToString(index1) + ".jpg");
-	m_face_down.loadImage("/faces/human/" + ofToString(index2) + ".jpg");
-	index1 = (rand() % 92) + 1;
-	index2 = (rand() % 92) + 1;
+	int index1 = (rand() % 92) + 1;
+	int index2 = (rand() % 92) + 1;
 	m_back_top.loadImage("/back/back (" + ofToString(index1) + ").jpg");
 	m_back_down.loadImage("/back/back (" + ofToString(index2) + ").jpg");
 	if (m_back_top.getWidth() > m_back_top.getHeight())m_back_top.rotate90(0);
@@ -63,8 +60,6 @@ void ofApp::setup(){
 	mode_back.resize(m_view[ModeView].width, m_view[ModeView].height);
 	m_game.getPlayer(TOP)->face().resize(xOffset / 2, xOffset * 7 / 12);
 	m_game.getPlayer(DOWN)->face().resize(xOffset / 2, xOffset * 7 / 12);
-	m_face_top.resize(xOffset / 2, xOffset * 7 / 12);
-	m_face_down.resize(xOffset / 2, xOffset * 7 / 12);
 }
 
 //--------------------------------------------------------------
@@ -285,7 +280,7 @@ void ofApp::drawTop() {
 	se <<setw(2) << setfill('0') << setiosflags(ios::right)<< 60 - (static_cast<int>(ofGetElapsedTimef()));
 	m_digtial.drawString(se.str(), xOffset / 2 - 40, yOffset - 40);
 	ofSetColor(255, 255, 255);
-	m_game.getPlayer(TOP)->face().draw(xOffset - m_face_top.getWidth() - 20, 20, 0);
+	m_game.getPlayer(TOP)->face().draw(xOffset - m_game.getPlayer(TOP)->face().getWidth() - 20, 20, 0);
 	m_back_top.draw(0, 0, -1);
 	ofPopView();
 }
@@ -301,7 +296,7 @@ void ofApp::drawDown() {
 	se << setw(2) << setfill('0') << setiosflags(ios::right) << 60 - (static_cast<int>(ofGetElapsedTimef()));
 	m_digtial.drawString(se.str(), xOffset / 2 - 40, 100);
 	ofSetColor(255, 255, 255);
-	m_game.getPlayer(DOWN)->face().draw(xOffset- m_face_down.getWidth() -20, yOffset- m_face_down.getHeight() -20, 0);
+	m_game.getPlayer(DOWN)->face().draw(xOffset- m_game.getPlayer(DOWN)->face().getWidth() -20, yOffset- m_game.getPlayer(DOWN)->face().getHeight() -20, 0);
 	m_back_down.draw(0, 0, -1);
 	ofPopView();
 }

@@ -443,6 +443,9 @@
     <Image Include="bin\data\back\back (90).jpg" />
     <Image Include="bin\data\back\back (91).jpg" />
     <Image Include="bin\data\back\back (92).jpg" />
+    <Image Include="bin\data\black.jpg" />
+    <Image Include="bin\data\chessboard.jpg" />
+    <Image Include="bin\data\faces\computer.jpg" />
     <Image Include="bin\data\faces\human\1.jpg" />
     <Image Include="bin\data\faces\human\10.jpg" />
     <Image Include="bin\data\faces\human\11.jpg" />
@@ -481,10 +484,23 @@
     <Image Include="bin\data\faces\human\8.jpg" />
     <Image Include="bin\data\faces\human\9.jpg" />
     <Image Include="bin\data\mode_back.png" />
+    <Image Include="bin\data\skin.jpg" />
+    <Image Include="bin\data\white.jpg" />
+    <Image Include="bin\data\wood.jpg" />
+    <Image Include="bin\data\wood2.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\data\ARDESTINE.ttf" />
     <Font Include="bin\data\Digital Dismay.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="bin\data\bowl.obj" />
+    <Object Include="bin\data\chess.obj" />
+    <Object Include="bin\data\robot_hand.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\human_hand.stl" />
+    <None Include="bin\data\robot_hand.mtl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

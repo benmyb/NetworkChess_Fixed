@@ -973,6 +973,27 @@
     <Image Include="bin\data\back\back (92).jpg">
       <Filter>resource\back</Filter>
     </Image>
+    <Image Include="bin\data\black.jpg">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="bin\data\chessboard.jpg">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="bin\data\skin.jpg">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="bin\data\white.jpg">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="bin\data\wood.jpg">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="bin\data\wood2.jpg">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="bin\data\faces\computer.jpg">
+      <Filter>resource\faces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="bin\data\ARDESTINE.ttf">
@@ -981,5 +1002,24 @@
     <Font Include="bin\data\Digital Dismay.otf">
       <Filter>resource</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="bin\data\bowl.obj">
+      <Filter>resource</Filter>
+    </Object>
+    <Object Include="bin\data\chess.obj">
+      <Filter>resource</Filter>
+    </Object>
+    <Object Include="bin\data\robot_hand.obj">
+      <Filter>resource</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\human_hand.stl">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="bin\data\robot_hand.mtl">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
 </Project>
