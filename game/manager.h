@@ -19,6 +19,9 @@ public:
 	void move_step(int x, int y);
 	void back(bool mode);
 	bool judge_success(CHESS_COLOR color);
+
+	void move_cancel();
+
 };
 
 
