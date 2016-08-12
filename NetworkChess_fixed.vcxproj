@@ -345,6 +345,46 @@
       <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\data\faces\human\1.jpg" />
+    <Image Include="bin\data\faces\human\10.jpg" />
+    <Image Include="bin\data\faces\human\11.jpg" />
+    <Image Include="bin\data\faces\human\12.jpg" />
+    <Image Include="bin\data\faces\human\13.jpg" />
+    <Image Include="bin\data\faces\human\14.jpg" />
+    <Image Include="bin\data\faces\human\15.jpg" />
+    <Image Include="bin\data\faces\human\16.jpg" />
+    <Image Include="bin\data\faces\human\17.jpg" />
+    <Image Include="bin\data\faces\human\18.jpg" />
+    <Image Include="bin\data\faces\human\19.jpg" />
+    <Image Include="bin\data\faces\human\2.jpg" />
+    <Image Include="bin\data\faces\human\20.jpg" />
+    <Image Include="bin\data\faces\human\21.jpg" />
+    <Image Include="bin\data\faces\human\22.jpg" />
+    <Image Include="bin\data\faces\human\23.jpg" />
+    <Image Include="bin\data\faces\human\24.jpg" />
+    <Image Include="bin\data\faces\human\25.jpg" />
+    <Image Include="bin\data\faces\human\26.jpg" />
+    <Image Include="bin\data\faces\human\27.jpg" />
+    <Image Include="bin\data\faces\human\28.jpg" />
+    <Image Include="bin\data\faces\human\29.jpg" />
+    <Image Include="bin\data\faces\human\3.jpg" />
+    <Image Include="bin\data\faces\human\30.jpg" />
+    <Image Include="bin\data\faces\human\31.jpg" />
+    <Image Include="bin\data\faces\human\32.jpg" />
+    <Image Include="bin\data\faces\human\33.jpg" />
+    <Image Include="bin\data\faces\human\34.jpg" />
+    <Image Include="bin\data\faces\human\35.jpg" />
+    <Image Include="bin\data\faces\human\36.jpg" />
+    <Image Include="bin\data\faces\human\37.jpg" />
+    <Image Include="bin\data\faces\human\4.jpg" />
+    <Image Include="bin\data\faces\human\5.jpg" />
+    <Image Include="bin\data\faces\human\6.jpg" />
+    <Image Include="bin\data\faces\human\7.jpg" />
+    <Image Include="bin\data\faces\human\8.jpg" />
+    <Image Include="bin\data\faces\human\9.jpg" />
+    <Image Include="bin\data\mode_back.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
     <VisualStudio>

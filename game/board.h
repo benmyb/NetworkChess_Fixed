@@ -10,8 +10,6 @@
 #include <string>
 using namespace std;
 
-
-int change = 88;
 const int board_size = 8;	// 棋局大小
 const int array_size = 10;	// 棋盘大小,扩大棋盘大小防止越界,减少越界判断
 const int dir_count = 8;	// 8方向联通

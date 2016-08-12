@@ -8,10 +8,15 @@
 class player {
 private:
 	string m_name;
-	bool our_side = true;
-	bool is_human = true;
+	ofImage m_face;
+	bool m_onTop = true;
+	bool m_ishuman = true;
+	bool m_isWhite = true;
 	ofxAssimpModelLoader m_hand;
 	ofxAssimpModelLoader m_bowl;
+	unsigned m_wins = 0;
+	unsigned m_loses = 0;
+
 };
 
 #endif // !PLAYER_H
