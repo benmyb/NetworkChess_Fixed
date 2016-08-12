@@ -179,10 +179,10 @@
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
     <ClCompile Include="game\board.cpp">
-      <Filter>src</Filter>
+      <Filter>game</Filter>
     </ClCompile>
     <ClCompile Include="game\manager.cpp">
-      <Filter>src</Filter>
+      <Filter>game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +242,18 @@
     </Filter>
     <Filter Include="addons\ofxXmlSettings\libs">
       <UniqueIdentifier>{687714A8-1662-FA1C-261F-50F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{50bc1610-2aba-47b8-9c88-dd391ae914f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{96c4bd79-6a13-4dc1-a5bd-f9daa1bfc98d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\faces">
+      <UniqueIdentifier>{9113fd00-1d35-4e98-b751-a33028dc9c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource\faces\human">
+      <UniqueIdentifier>{8f9e8933-b689-46c5-a663-7043c15b765b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -540,16 +552,140 @@
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClInclude>
     <ClInclude Include="game\board.h">
-      <Filter>src</Filter>
+      <Filter>game</Filter>
     </ClInclude>
     <ClInclude Include="game\manager.h">
-      <Filter>src</Filter>
+      <Filter>game</Filter>
     </ClInclude>
     <ClInclude Include="game\player.h">
-      <Filter>src</Filter>
+      <Filter>game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\data\faces\human\1.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\2.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\3.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\4.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\5.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\6.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\7.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\8.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\9.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\10.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\11.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\12.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\13.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\14.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\15.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\16.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\17.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\18.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\19.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\20.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\21.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\22.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\23.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\24.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\25.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\26.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\27.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\28.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\29.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\30.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\31.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\32.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\33.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\34.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\35.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\36.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\faces\human\37.jpg">
+      <Filter>resource\faces\human</Filter>
+    </Image>
+    <Image Include="bin\data\mode_back.png">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="bin\data\ARDESTINE.ttf">
+      <Filter>resource</Filter>
+    </Font>
+    <Font Include="bin\data\Digital Dismay.otf">
+      <Filter>resource</Filter>
+    </Font>
   </ItemGroup>
 </Project>
