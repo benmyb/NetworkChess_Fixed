@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	srand((unsigned)time(NULL));
+	ofDisableArbTex();
 	ofSetVerticalSync(true);
 	ofEnableDepthTest(); //Enable z-buffering
 	ofEnableSmoothing();
@@ -13,13 +14,55 @@ void ofApp::setup(){
 	}
 	setupViewport();
 	setupCam();
-	m_text.loadFont("sans-serif", 21, true, true);
-	m_title.loadFont("AR DESTINE", 80, true, true);
-	m_digtial.loadFont("Digital Dismay", 80, true, true);
+
+	m_cam[MainView].begin(m_view[MainView]);
+	up_light.setPosition(1000, 1000, 2000);
+	up_light.lookAt(ofVec3f(0, 0, 0));
+	down_light.setPosition(-1000, -1000, -2000);
+	down_light.lookAt(ofVec3f(0, 0, 0));
+	on_light.setPosition(0, 0, 1000);
+	on_light.lookAt(ofVec3f(0, 0, 0));
+	other_light.setPosition(750, 750, 1000);
+	other_light.lookAt(ofVec3f(400, 400, 0));
+	m_cam[MainView].end();
+	black_chess.loadImage("black.jpg");
+	white_chess.loadImage("white.jpg");
+	m_chessboard_jpg.load("chessboard.jpg");
+	wood.loadImage("wood.jpg");
+	wood_bowl.loadImage("wood2.jpg");
+	skin.loadImage("skin.jpg");
+	ofSpherePrimitive c;
+	c.setRadius(35);
+	c.setScale(1, 1, 0.3);
+	c.setResolution(30);
+	c.rotate(180, 1, 0, 0);
+	for (int y(0); y < 8; ++y) {
+		for (int x(0); x < 8; ++x) {
+			c.setPosition(-m_chessboard_jpg.getWidth() / 2 + m_chessboard_jpg.getWidth() / 16 + x * m_chessboard_jpg.getWidth() / 8, m_chessboard_jpg.getHeight() / 2 - m_chessboard_jpg.getHeight() / 16 - y * m_chessboard_jpg.getHeight() / 8, 12);
+			chess.push_back(c);
+		}
+	}
+
+	m_game.resetGame(HvsC, true);
+
+	m_text.loadFont("sans-serif", 21, true, true, true);
+	m_title.loadFont("/ARDESTINE.ttf", 80, true, true, true);
+	m_digtial.loadFont("/Digital Dismay.otf", 80, true, true, true);
 	int index1((rand() % 37) + 1), index2((rand() % 37) + 1);
 	m_face_top.loadImage("/faces/human/" + ofToString(index1) + ".jpg");
 	m_face_down.loadImage("/faces/human/" + ofToString(index2) + ".jpg");
+	index1 = (rand() % 92) + 1;
+	index2 = (rand() % 92) + 1;
+	m_back_top.loadImage("/back/back (" + ofToString(index1) + ").jpg");
+	m_back_down.loadImage("/back/back (" + ofToString(index2) + ").jpg");
+	if (m_back_top.getWidth() > m_back_top.getHeight())m_back_top.rotate90(0);
+	if (m_back_down.getWidth() > m_back_down.getHeight())m_back_down.rotate90(0);
+	m_back_top.resize(m_back_top.getWidth() / m_back_top.getHeight()*yOffset*1.2, yOffset*1.2);
+	m_back_down.resize(m_back_down.getWidth() / m_back_down.getHeight()*yOffset*1.2, yOffset*1.2);
 	mode_back.loadImage("mode_back.png");
+	mode_back.resize(m_view[ModeView].width, m_view[ModeView].height);
+	m_game.getPlayer(TOP)->face().resize(xOffset / 2, xOffset * 7 / 12);
+	m_game.getPlayer(DOWN)->face().resize(xOffset / 2, xOffset * 7 / 12);
 	m_face_top.resize(xOffset / 2, xOffset * 7 / 12);
 	m_face_down.resize(xOffset / 2, xOffset * 7 / 12);
 }
@@ -100,6 +143,11 @@ void ofApp::mouseExited(int x, int y){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 	setupViewport();
+	//if (m_back_top.getWidth() > m_back_top.getHeight())m_back_top.rotate90(0);
+	m_back_top.resize(m_back_top.getWidth() / m_back_top.getHeight()*yOffset*1.2, yOffset*1.2);
+	//if (m_back_down.getWidth() > m_back_down.getHeight())m_back_down.rotate90(0);
+	m_back_down.resize(m_back_down.getWidth() / m_back_down.getHeight()*yOffset*1.2, yOffset*1.2);
+	mode_back.resize(m_view[ModeView].width, m_view[ModeView].height);
 }
 
 //--------------------------------------------------------------
@@ -194,18 +242,34 @@ void ofApp::drawViewportOutline() {
 
 void ofApp::drawMain() {
 	m_cam[MainView].begin(m_view[MainView]);
-	
-	ofDrawPlane(500, 500);
-	
+	wood.bind();
+	ofDrawBox(0, 0, -15, m_chessboard_jpg.getWidth(), m_chessboard_jpg.getHeight(), -20);
+	wood.unbind();
+	m_chessboard_jpg.draw(-m_chessboard_jpg.getWidth() / 2, -m_chessboard_jpg.getHeight() / 2);
+	int pre(m_game.getprechess());
+	if (pre >= 0 && pre < 64) {
+		ofSetColor(0, 255, 45);
+		ofPoint pos(chess[pre].getPosition());
+		pos.z += 5;
+		ofDrawSphere(pos, 10);
+	}
+	for (unsigned i(1); i < 2 * chess_num + 1; ++i) {
+		if (i % 2 + 1 == WHITE && m_game.on_board()[i] != 0) {
+			white_chess.bind();
+			chess[data2real(m_game.on_board()[i])].draw();
+			white_chess.unbind();
+		}
+		else if(m_game.on_board()[i] != 0) {
+			black_chess.bind();
+			chess[data2real(m_game.on_board()[i])].draw();
+			black_chess.unbind();
+		}
+	}
 	m_cam[MainView].end();
 
 	ofPushView();
 	ofViewport(m_view[MainView]);
 	ofSetupScreen();
-	stringstream ss;
-	ss << "Main viewport";
-	ofSetColor(0, 0, 0);
-	m_title.drawString(ss.str(), 5, 105);
 	ofSetColor(255, 255, 255);
 	ofPopView();
 }
@@ -215,13 +279,14 @@ void ofApp::drawTop() {
 	ofViewport(m_view[TopView]);
 	ofSetupScreen();
 	stringstream ss,se;
-	ss << "Ben";
+	ss << m_game.getPlayer(TOP)->name();
 	ofSetColor(0, 0, 0);
 	m_text.drawString(ss.str(), 10, 25);
 	se <<setw(2) << setfill('0') << setiosflags(ios::right)<< 60 - (static_cast<int>(ofGetElapsedTimef()));
 	m_digtial.drawString(se.str(), xOffset / 2 - 40, yOffset - 40);
 	ofSetColor(255, 255, 255);
-	m_face_top.draw(xOffset - m_face_top.getWidth() - 20, 20, 0);
+	m_game.getPlayer(TOP)->face().draw(xOffset - m_face_top.getWidth() - 20, 20, 0);
+	m_back_top.draw(0, 0, -1);
 	ofPopView();
 }
 
@@ -230,13 +295,14 @@ void ofApp::drawDown() {
 	ofViewport(m_view[DownView]);
 	ofSetupScreen();
 	stringstream ss, se;
-	ss << "Daisy";
+	ss << m_game.getPlayer(DOWN)->name();
 	ofSetColor(0, 0, 0);
 	m_text.drawString(ss.str(), 10, yOffset-10);
 	se << setw(2) << setfill('0') << setiosflags(ios::right) << 60 - (static_cast<int>(ofGetElapsedTimef()));
 	m_digtial.drawString(se.str(), xOffset / 2 - 40, 100);
 	ofSetColor(255, 255, 255);
-	m_face_down.draw(xOffset- m_face_down.getWidth() -20, yOffset- m_face_down.getHeight() -20, 0);
+	m_game.getPlayer(DOWN)->face().draw(xOffset- m_face_down.getWidth() -20, yOffset- m_face_down.getHeight() -20, 0);
+	m_back_down.draw(0, 0, -1);
 	ofPopView();
 }
 
@@ -247,7 +313,20 @@ void ofApp::drawMode() {
 	mode_back.draw(0, 0, -1);
 	string ss;
 	ofSetColor(205, 10, 100);
-	ss = "STEP";
+	switch (m_game.getGameMode()) {
+	case STEP:
+		ss = "STEP";
+		break;
+	case MOVE:
+		ss = "MOVE";
+		break;
+	case FREE:
+		ss = "FREE";
+		break;
+	case SHOW:
+		ss = "SHOW";
+		break;
+	}
 	m_title.drawString(ss, 2, 90);
 	ofSetColor(255, 255, 255);
 	ofPopView();
@@ -283,6 +362,10 @@ void ofApp::drawBoard() {
 	ofSetColor(0, 0, 0);
 	m_title.drawString(ss.str(), 5, 25);
 	ofPopView();
+}
+
+void ofApp::drawStage() {
+
 }
 
 //--------------------------------------------------------------
