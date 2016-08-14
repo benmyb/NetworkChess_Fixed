@@ -82,6 +82,40 @@ void ofApp::draw(){
 	drawViewportOutline();
 }
 
+void ofApp::setUIs() {
+	m_UITree.reset(&(ofxUISuperCanvas("TreeView", 2)));
+	m_UITree->toggleVisible();
+	m_UISetting.reset(&(ofxUICanvas()));
+	m_UIStart.reset(&(ofxUICanvas()));
+	m_UIMain.reset(&(ofxUITabBar()));
+
+	m_UIMain->addLabel("Network Chess", OFX_UI_FONT_LARGE);
+	m_UIMain->addFPS(OFX_UI_FONT_SMALL);
+	m_UIMain->addLabel("Press 'h'-> visiable", OFX_UI_FONT_SMALL);
+	m_UIMain->addSpacer();
+	m_UIMain->setColorBack(10);
+	
+	m_UISetting->setColorBack(10);
+	m_UISetting->setName("Settings");
+	m_UISetting->addLabel("Settings", OFX_UI_FONT_MEDIUM);
+	m_UISetting->addSpacer();
+	vector<string> names = { "player vs player","player vs computer","computer vs computer" };
+	m_UISetting->addRadio("player_type", names);
+	m_UISetting->addSpacer();
+	m_UISetting->addTextInput("player_top", player_top);
+	m_UISetting->addTextInput("player_down", player_down);
+	m_UISetting->addSpacer();
+	m_UISetting->addLabelToggle("RESET", m_isReset);
+	m_UISetting->autoSizeToFitWidgets();
+	ofAddListener(m_UISetting.get()->newGUIEvent, this, &ofApp::guiEvent);
+	m_UIMain->addCanvas(m_UISetting.get());
+
+}
+
+void ofApp::guiEvent() {
+
+}
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	switch (key) {
@@ -281,7 +315,7 @@ void ofApp::drawTop() {
 	m_digtial.drawString(se.str(), xOffset / 2 - 40, yOffset - 40);
 	ofSetColor(255, 255, 255);
 	m_game.getPlayer(TOP)->face().draw(xOffset - m_game.getPlayer(TOP)->face().getWidth() - 20, 20, 0);
-	m_back_top.draw(0, 0, -1);
+	//m_back_top.draw(0, 0, -1);
 	ofPopView();
 }
 
@@ -297,7 +331,7 @@ void ofApp::drawDown() {
 	m_digtial.drawString(se.str(), xOffset / 2 - 40, 100);
 	ofSetColor(255, 255, 255);
 	m_game.getPlayer(DOWN)->face().draw(xOffset- m_game.getPlayer(DOWN)->face().getWidth() -20, yOffset- m_game.getPlayer(DOWN)->face().getHeight() -20, 0);
-	m_back_down.draw(0, 0, -1);
+	//m_back_down.draw(0, 0, -1);
 	ofPopView();
 }
 

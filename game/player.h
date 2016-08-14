@@ -32,7 +32,6 @@ public:
 
 	const string& name()const { return m_name; }
 	ofImage& face() { return m_face; }
-	virtual void getxy(int & x, int & y) = 0;
 
 
 };

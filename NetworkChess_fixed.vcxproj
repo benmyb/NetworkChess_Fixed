@@ -173,7 +173,6 @@
   <ItemGroup>
     <ClCompile Include="game\board.cpp" />
     <ClCompile Include="game\computer.cpp" />
-    <ClCompile Include="game\manager.cpp" />
     <ClCompile Include="game\player.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -238,7 +237,6 @@
     <ClInclude Include="game\computer.h" />
     <ClInclude Include="game\game.h" />
     <ClInclude Include="game\human.h" />
-    <ClInclude Include="game\manager.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="..\..\..\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.h" />
@@ -351,98 +349,15 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bin\data\back\back (1).jpg" />
-    <Image Include="bin\data\back\back (10).jpg" />
-    <Image Include="bin\data\back\back (11).jpg" />
-    <Image Include="bin\data\back\back (12).jpg" />
-    <Image Include="bin\data\back\back (13).jpg" />
-    <Image Include="bin\data\back\back (14).jpg" />
-    <Image Include="bin\data\back\back (15).jpg" />
-    <Image Include="bin\data\back\back (16).jpg" />
-    <Image Include="bin\data\back\back (17).jpg" />
-    <Image Include="bin\data\back\back (18).jpg" />
-    <Image Include="bin\data\back\back (19).jpg" />
-    <Image Include="bin\data\back\back (2).jpg" />
-    <Image Include="bin\data\back\back (20).jpg" />
-    <Image Include="bin\data\back\back (21).jpg" />
-    <Image Include="bin\data\back\back (22).jpg" />
-    <Image Include="bin\data\back\back (23).jpg" />
-    <Image Include="bin\data\back\back (24).jpg" />
-    <Image Include="bin\data\back\back (25).jpg" />
-    <Image Include="bin\data\back\back (26).jpg" />
-    <Image Include="bin\data\back\back (27).jpg" />
-    <Image Include="bin\data\back\back (28).jpg" />
-    <Image Include="bin\data\back\back (29).jpg" />
-    <Image Include="bin\data\back\back (3).jpg" />
-    <Image Include="bin\data\back\back (30).jpg" />
-    <Image Include="bin\data\back\back (31).jpg" />
-    <Image Include="bin\data\back\back (32).jpg" />
-    <Image Include="bin\data\back\back (33).jpg" />
-    <Image Include="bin\data\back\back (34).jpg" />
-    <Image Include="bin\data\back\back (35).jpg" />
-    <Image Include="bin\data\back\back (36).jpg" />
-    <Image Include="bin\data\back\back (37).jpg" />
-    <Image Include="bin\data\back\back (38).jpg" />
-    <Image Include="bin\data\back\back (39).jpg" />
-    <Image Include="bin\data\back\back (4).jpg" />
-    <Image Include="bin\data\back\back (40).jpg" />
-    <Image Include="bin\data\back\back (41).jpg" />
-    <Image Include="bin\data\back\back (42).jpg" />
-    <Image Include="bin\data\back\back (43).jpg" />
-    <Image Include="bin\data\back\back (44).jpg" />
-    <Image Include="bin\data\back\back (45).jpg" />
-    <Image Include="bin\data\back\back (46).jpg" />
-    <Image Include="bin\data\back\back (47).jpg" />
-    <Image Include="bin\data\back\back (48).jpg" />
-    <Image Include="bin\data\back\back (49).jpg" />
-    <Image Include="bin\data\back\back (5).jpg" />
-    <Image Include="bin\data\back\back (50).jpg" />
-    <Image Include="bin\data\back\back (51).jpg" />
-    <Image Include="bin\data\back\back (52).jpg" />
-    <Image Include="bin\data\back\back (53).jpg" />
-    <Image Include="bin\data\back\back (54).jpg" />
-    <Image Include="bin\data\back\back (55).jpg" />
-    <Image Include="bin\data\back\back (56).jpg" />
-    <Image Include="bin\data\back\back (57).jpg" />
-    <Image Include="bin\data\back\back (58).jpg" />
-    <Image Include="bin\data\back\back (59).jpg" />
-    <Image Include="bin\data\back\back (6).jpg" />
-    <Image Include="bin\data\back\back (60).jpg" />
-    <Image Include="bin\data\back\back (61).jpg" />
-    <Image Include="bin\data\back\back (62).jpg" />
-    <Image Include="bin\data\back\back (63).jpg" />
-    <Image Include="bin\data\back\back (64).jpg" />
-    <Image Include="bin\data\back\back (65).jpg" />
-    <Image Include="bin\data\back\back (66).jpg" />
-    <Image Include="bin\data\back\back (67).jpg" />
-    <Image Include="bin\data\back\back (68).jpg" />
-    <Image Include="bin\data\back\back (69).jpg" />
-    <Image Include="bin\data\back\back (7).jpg" />
-    <Image Include="bin\data\back\back (70).jpg" />
-    <Image Include="bin\data\back\back (71).jpg" />
-    <Image Include="bin\data\back\back (72).jpg" />
-    <Image Include="bin\data\back\back (73).jpg" />
-    <Image Include="bin\data\back\back (74).jpg" />
-    <Image Include="bin\data\back\back (75).jpg" />
-    <Image Include="bin\data\back\back (76).jpg" />
-    <Image Include="bin\data\back\back (77).jpg" />
-    <Image Include="bin\data\back\back (78).jpg" />
-    <Image Include="bin\data\back\back (79).jpg" />
-    <Image Include="bin\data\back\back (8).jpg" />
-    <Image Include="bin\data\back\back (80).jpg" />
-    <Image Include="bin\data\back\back (81).jpg" />
-    <Image Include="bin\data\back\back (82).jpg" />
-    <Image Include="bin\data\back\back (83).jpg" />
-    <Image Include="bin\data\back\back (84).jpg" />
-    <Image Include="bin\data\back\back (85).jpg" />
-    <Image Include="bin\data\back\back (86).jpg" />
-    <Image Include="bin\data\back\back (87).jpg" />
-    <Image Include="bin\data\back\back (88).jpg" />
-    <Image Include="bin\data\back\back (89).jpg" />
-    <Image Include="bin\data\back\back (9).jpg" />
-    <Image Include="bin\data\back\back (90).jpg" />
-    <Image Include="bin\data\back\back (91).jpg" />
-    <Image Include="bin\data\back\back (92).jpg" />
+    <None Include="bin\data\.gitkeep" />
+    <None Include="bin\data\human_hand.stl" />
+    <None Include="bin\data\robot_hand.mtl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="bin\data\ARDESTINE.ttf" />
+    <Font Include="bin\data\Digital Dismay.otf" />
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="bin\data\black.jpg" />
     <Image Include="bin\data\chessboard.jpg" />
     <Image Include="bin\data\faces\computer.jpg" />
@@ -490,17 +405,9 @@
     <Image Include="bin\data\wood2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="bin\data\ARDESTINE.ttf" />
-    <Font Include="bin\data\Digital Dismay.otf" />
-  </ItemGroup>
-  <ItemGroup>
     <Object Include="bin\data\bowl.obj" />
     <Object Include="bin\data\chess.obj" />
     <Object Include="bin\data\robot_hand.obj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\data\human_hand.stl" />
-    <None Include="bin\data\robot_hand.mtl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
