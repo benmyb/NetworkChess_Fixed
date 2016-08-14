@@ -730,14 +730,14 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="bin\data\bowl.obj">
+    <Resource Include="bin\data\chess.obj">
       <Filter>resources</Filter>
-    </Object>
-    <Object Include="bin\data\chess.obj">
+    </Resource>
+    <Resource Include="bin\data\robot_hand.obj">
       <Filter>resources</Filter>
-    </Object>
-    <Object Include="bin\data\robot_hand.obj">
+    </Resource>
+    <Resource Include="bin\data\bowl.obj">
       <Filter>resources</Filter>
-    </Object>
+    </Resource>
   </ItemGroup>
 </Project>

@@ -28,6 +28,12 @@ void player::hand_reset(const string & name) {
 
 void player::bowl_reset(const string & name) {
 	m_bowl.loadModel(name);
+	m_bowl.setScale(0.5, 0.5, 0.5);
+}
+
+void player::stack_reset(const string & name) {
+	m_chess_stack.loadModel(name);
+	m_chess_stack.setScale(0.45, 0.45, 0.45);
 }
 
 void player::data_reset() {
@@ -37,8 +43,8 @@ void player::data_reset() {
 
 void player::settop(bool top) {
 	m_onTop = top;
-	if (m_hand.getRotationAngle(0) == 0)m_hand.setRotation(0, 180, 0, 0, 1);
-	if (m_bowl.getRotationAngle(0) == 0)m_bowl.setRotation(0, 180, 0, 0, 1);
+	if (m_onTop && m_hand.getRotationAngle(0) == 0)m_hand.setRotation(0, 180, 0, 0, 1);
+	if (m_onTop && m_bowl.getRotationAngle(0) == 0)m_bowl.setRotation(0, 180, 0, 0, 1);
 }
 
 void player::sethuman(bool human) {

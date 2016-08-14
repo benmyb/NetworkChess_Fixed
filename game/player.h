@@ -24,6 +24,7 @@ public:
 	void face_reset(const string& name);
 	void hand_reset(const string& name);
 	void bowl_reset(const string& name);
+	void stack_reset(const string& name);
 	void data_reset();
 
 	void settop(bool top);
@@ -32,6 +33,8 @@ public:
 
 	const string& name()const { return m_name; }
 	ofImage& face() { return m_face; }
+	ofxAssimpModelLoader& hand() { return m_hand; }
+	bool ishuman() { return m_ishuman; }
 
 
 };

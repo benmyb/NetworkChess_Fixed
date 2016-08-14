@@ -208,7 +208,9 @@ public:
 	// 简单计算每个点周围的可见点数目 
 	int  get_scores(int color);
 	
-	
+	int who_turn() { return who_step; }
+
+	int getselect() { return selected_chess; }
 
 };
 #endif

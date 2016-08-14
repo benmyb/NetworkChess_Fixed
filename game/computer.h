@@ -71,7 +71,6 @@ public:
 		m_chess_stack.setScale(0.45, 0.45, 0.45);
 		m_wins = 0;
 		m_loses = 0;
-		
 	}
 	/*void getxy(int & x, int & y);
 

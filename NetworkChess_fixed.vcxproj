@@ -405,9 +405,18 @@
     <Image Include="bin\data\wood2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="bin\data\bowl.obj" />
-    <Object Include="bin\data\chess.obj" />
-    <Object Include="bin\data\robot_hand.obj" />
+    <Resource Include="bin\data\bowl.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+    </Resource>
+    <Resource Include="bin\data\chess.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+    </Resource>
+    <Resource Include="bin\data\robot_hand.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

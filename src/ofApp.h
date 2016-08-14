@@ -39,6 +39,8 @@ class ofApp : public ofBaseApp{
 		void drawTree();
 		void drawBoard();
 		void drawStage();
+		int xytoi(int x, int y);
+		void screen2board(int & x, int & y);
 private:
 		float xOffset;
 		float yOffset;
@@ -53,6 +55,8 @@ private:
 		ofImage mode_back;
 		bool m_isTreeView = false;
 		bool m_isReset = false;
+		bool m_topFirst = true;
+		bool m_istopturn = m_topFirst;
 
 		ofImage m_chessboard_jpg;
 		ofImage wood;
