@@ -43,13 +43,13 @@ void ofApp::setup(){
 		}
 	}
 
-	m_game.resetGame(HvsH, m_topFirst);
+	m_game.resetGame(HvsC, m_topFirst);
 
 	m_text.loadFont("sans-serif", 21, true, true, true);
 	m_title.loadFont("/ARDESTINE.ttf", 80, true, true, true);
 	m_digtial.loadFont("/Digital Dismay.otf", 80, true, true, true);
-	int index1 = (rand() % 92) + 1;
-	int index2 = (rand() % 92) + 1;
+	int index1 = (rand() % 61) + 1;
+	int index2 = (rand() % 61) + 1;
 	m_back_top.loadImage("/back/back (" + ofToString(index1) + ").jpg");
 	m_back_down.loadImage("/back/back (" + ofToString(index2) + ").jpg");
 	if (m_back_top.getWidth() > m_back_top.getHeight())m_back_top.rotate90(0);
@@ -67,7 +67,42 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	
+	if (m_game.getPlayerMode() == HvsC) {
+		int p1(0), p2(0),place(0);
+		ofResetElapsedTimeCounter();
+		if (m_istopturn && m_game.getGameMode() == STEP && m_timeForComputer) {
+			if (!m_game.getPlayer(TOP)->step(p1, p2)) {
+				m_game.getGameMode() = FREE;
+				m_istopturn = false;
+			}
+			cout << "Computer takes " << ofGetElapsedTimef() << " s" << endl;
+			m_istopturn = false;
+			m_timeForComputer = false;
+			ofResetElapsedTimeCounter();
+		}
+		else if (m_istopturn && m_game.getGameMode() == MOVE && m_timeForComputer) {
+			ofResetElapsedTimeCounter();
+			if (!m_game.getPlayer(TOP)->step(p1, p2)) {
+				m_game.getGameMode() = FREE;
+				m_istopturn = false;
+			}
+			cout << "Computer takes " << ofGetElapsedTimef() << " s" << endl;
+			m_istopturn = false;
+			m_timeForComputer = false;
+			ofResetElapsedTimeCounter();
+		}
+	}
+	if (m_game.getchessnum() >= 11 && m_isFin == false) {
+		if (m_game.judge_success(BLACK) || m_game.judge_success(WHITE)) {
+			m_isFin = true;
+			stack<int> success_point(m_game.getsuccess());
+			while (!success_point.empty()) {
+				success_path.addVertex(chess[data2real(success_point.top())].getPosition());
+				success_point.pop();
+			}
+			m_game.getGameMode() = FREE;
+		}
+	}
 }
 
 //--------------------------------------------------------------
@@ -78,12 +113,22 @@ void ofApp::draw(){
 		drawTop();
 		drawDown();
 		drawMode();
+		if (m_isFin) {
+			ofSetLineWidth(20);
+			m_cam[MainView].begin(m_view[MainView]);
+			ofSetColor(255, 0, 0);
+			success_path.draw();
+			ofSetColor(255);
+			m_cam[MainView].end();
+			ofSetLineWidth(1);
+		}
 	}
 	else {
 		drawTree();
 		drawBoard();
 	}
 	drawViewportOutline();
+	if(m_istopturn && m_game.getPlayerMode()==HvsC)m_timeForComputer = true;
 }
 
 void ofApp::setUIs() {
@@ -131,7 +176,52 @@ void ofApp::keyPressed(int key){
 
 	case OF_KEY_RETURN:
 		m_game.getGameMode() = STEP;
+		m_isFin = false;
+		success_path.clear();
 		ofResetElapsedTimeCounter();
+		break;
+
+	case 'b':
+		int p1, p2;
+		m_game.back(p1, p2);
+		break;
+
+	case 'f':
+		m_game.getGameMode() = FREE;
+		break;
+
+	case OF_KEY_F1:
+		if (!m_game.getPlayer(TOP)->ishuman())m_game.getPlayer(TOP)->m_level = 4;
+		break;
+
+	case OF_KEY_F2:
+		if (!m_game.getPlayer(TOP)->ishuman())m_game.getPlayer(TOP)->m_level = 6;
+		break;
+
+	case OF_KEY_F3:
+		if (!m_game.getPlayer(TOP)->ishuman())m_game.getPlayer(TOP)->m_level = 8;
+		break;
+
+	case '1':
+		m_game.resetGame(HvsH, m_topFirst);
+		m_isFin = false;
+		success_path.clear();
+		m_istopturn = m_topFirst;
+		if (m_back_top.getWidth() > m_back_top.getHeight())m_back_top.rotate90(0);
+		if (m_back_down.getWidth() > m_back_down.getHeight())m_back_down.rotate90(0);
+		m_game.getPlayer(TOP)->face().resize(xOffset / 2, xOffset * 7 / 12);
+		m_game.getPlayer(DOWN)->face().resize(xOffset / 2, xOffset * 7 / 12);
+		break;
+
+	case '2':
+		m_game.resetGame(HvsC, m_topFirst);
+		m_isFin = false;
+		success_path.clear();
+		m_istopturn = m_topFirst;
+		if (m_back_top.getWidth() > m_back_top.getHeight())m_back_top.rotate90(0);
+		if (m_back_down.getWidth() > m_back_down.getHeight())m_back_down.rotate90(0);
+		m_game.getPlayer(TOP)->face().resize(xOffset / 2, xOffset * 7 / 12);
+		m_game.getPlayer(DOWN)->face().resize(xOffset / 2, xOffset * 7 / 12);
 		break;
 	default:
 		break;
@@ -155,8 +245,8 @@ void ofApp::screen2board(int & x, int & y) {
 	ofVec3f zero(m_cam[MainView].worldToScreen(ofVec3f(-m_chessboard_jpg.getWidth() / 2, m_chessboard_jpg.getHeight() / 2), m_view[MainView])),
 		max(m_cam[MainView].worldToScreen(ofVec3f(m_chessboard_jpg.getWidth() / 2, -m_chessboard_jpg.getHeight() / 2), m_view[MainView]));
 	double x_ruler((max.x - zero.x) / 8), y_ruler((max.y - zero.y) / 8);
-	x = floor((x - zero.x) / x_ruler) + 1;
-	y = floor((y - zero.y) / y_ruler) + 1;
+	x = floor((x - zero.x) / x_ruler);
+	y = floor((y - zero.y) / y_ruler);
 }
 
 //--------------------------------------------------------------
@@ -197,6 +287,7 @@ void ofApp::mousePressed(int x, int y, int button){
 	if (m_game.getGameMode() == STEP) {
 		if (m_istopturn && m_game.getPlayer(TOP)->ishuman()) {
 			screen2board(x, y);
+			real2data(x, y);
 			if (m_game.step(x, y)) {
 				m_istopturn = false;
 				ofResetElapsedTimeCounter();
@@ -204,12 +295,13 @@ void ofApp::mousePressed(int x, int y, int button){
 		}
 		else if (!m_istopturn && m_game.getPlayer(DOWN)->ishuman()) {
 			screen2board(x, y);
+			real2data(x, y);
 			if (m_game.step(x, y)) {
 				m_istopturn = true;
 				ofResetElapsedTimeCounter();
 			}
 		}
-		if (m_game.who_step() >= 20) {
+		if (m_game.getmode()) {
 			m_game.getGameMode() = MOVE;
 		}
 	}
@@ -217,6 +309,7 @@ void ofApp::mousePressed(int x, int y, int button){
 		if (m_istopturn && m_game.getPlayer(TOP)->ishuman()) {
 			if (m_game.isselect()) {
 				screen2board(x, y);
+				real2data(x, y);
 				if (m_game.move_step(x, y)) {
 					m_istopturn = false;
 					ofResetElapsedTimeCounter();
@@ -224,19 +317,22 @@ void ofApp::mousePressed(int x, int y, int button){
 			}
 			else {
 				screen2board(x, y);
+				real2data(x, y);
 				m_game.select(x, y);
 			}
 		}
 		else if (!m_istopturn && m_game.getPlayer(DOWN)->ishuman()) {
 			if (m_game.isselect()) {
 				screen2board(x, y);
+				real2data(x, y);
 				if (m_game.move_step(x, y)) {
-					m_istopturn = false;
+					m_istopturn = true;
 					ofResetElapsedTimeCounter();
 				}
 			}
 			else {
 				screen2board(x, y);
+				real2data(x, y);
 				m_game.select(x, y);
 			}
 		}
@@ -365,7 +461,7 @@ void ofApp::drawMain() {
 	ofDrawBox(0, 0, -15, m_chessboard_jpg.getWidth(), m_chessboard_jpg.getHeight(), -20);
 	wood.unbind();
 	m_chessboard_jpg.draw(-m_chessboard_jpg.getWidth() / 2, -m_chessboard_jpg.getHeight() / 2);
-	int pre(data2real(m_game.getprechess()));
+	int pre((m_game.getprechess()));
 	if (pre >= 0 && pre < 64) {
 		ofSetColor(0, 255, 45);
 		ofPoint pos(chess[pre].getPosition());
@@ -373,11 +469,14 @@ void ofApp::drawMain() {
 		ofDrawSphere(pos, 10);
 	}
 	ofSetColor(255);
-	for (unsigned i(1); i < 2 * chess_num + 1; ++i) {
+	for (unsigned i(1); i <= m_game.getchessnum(); ++i) {
 		if (i % 2 == WHITE && m_game.on_board()[i] != 0) {
 			white_chess.bind();
 			chess[data2real(m_game.on_board()[i])].draw();
 			white_chess.unbind();
+
+			
+
 		}
 		else if(m_game.on_board()[i] != 0) {
 			black_chess.bind();
@@ -388,6 +487,11 @@ void ofApp::drawMain() {
 
 	if (m_istopturn)m_game.getPlayer(TOP)->hand().drawFaces();
 	else m_game.getPlayer(DOWN)->hand().drawFaces();
+
+	int select(data2real(m_game.getselect()));
+	ofSetColor(255, 0, 0);
+	if (select >= 0 && select < 64 && m_game.isselect())ofDrawCircle(chess[select].getPosition(), 50);
+	ofSetColor(255, 255, 255);
 
 	m_cam[MainView].end();
 
@@ -417,7 +521,7 @@ void ofApp::drawTop() {
 	else m_digtial.drawString(ofToString(60), xOffset / 2 - 40, yOffset - 40);
 	ofSetColor(255, 255, 255);
 	m_game.getPlayer(TOP)->face().draw(xOffset - m_game.getPlayer(TOP)->face().getWidth() - 20, 20, 0);
-	//m_back_top.draw(0, 0, -1);
+	m_back_top.draw(0, 0, -1);
 	ofPopView();
 }
 
@@ -440,7 +544,7 @@ void ofApp::drawDown() {
 	else m_digtial.drawString(ofToString(60), xOffset / 2 - 40, 100);
 	ofSetColor(255, 255, 255);
 	m_game.getPlayer(DOWN)->face().draw(xOffset- m_game.getPlayer(DOWN)->face().getWidth() -20, yOffset- m_game.getPlayer(DOWN)->face().getHeight() -20, 0);
-	//m_back_down.draw(0, 0, -1);
+	m_back_down.draw(0, 0, -1);
 	ofPopView();
 }
 
@@ -472,6 +576,7 @@ void ofApp::drawMode() {
 
 void ofApp::drawTree() {
 	m_cam[TreeView].begin(m_view[TreeView]);
+	ofEnableSeparateSpecularLight();
 	ofDrawPlane(500, 500);
 
 	m_cam[TreeView].end();
@@ -488,17 +593,15 @@ void ofApp::drawTree() {
 
 void ofApp::drawBoard() {
 	m_cam[BoardView].begin(m_view[BoardView]);
-	ofDrawPlane(100, 100);
+	ofEnableSeparateSpecularLight();
+	ofSetColor(255, 255, 255);
+	m_chessboard_jpg.draw(-m_chessboard_jpg.getWidth() / 2, -m_chessboard_jpg.getHeight() / 2);
 
 	m_cam[BoardView].end();
 	
 	ofPushView();
 	ofViewport(m_view[BoardView]);
 	ofSetupScreen();
-	stringstream ss;
-	ss << "Board Viewport";
-	ofSetColor(0, 0, 0);
-	m_title.drawString(ss.str(), 5, 25);
 	ofPopView();
 }
 

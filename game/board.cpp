@@ -6,6 +6,7 @@ void data2real(int & x, int & y) {
 }
 
 int data2real(int index) {
+	index -= 11;
 	return (index % array_size) + (index / array_size) * board_size;
 }
 
@@ -36,7 +37,7 @@ void real_itoxy(int i, int & x, int & y) {
 	y = i / board_size;
 }
 
-board::board() {
+board::board():m_feasible(board_size*board_size) {
 	memset(m_head, 0, sizeof(m_head));
 	init();
 	init_link();
@@ -154,7 +155,7 @@ bool board::feasible(int color, int x, int y) {
 		near_x = x + m_surround[i][0];
 		near_y = y + m_surround[i][1];
 		// 表示周围有一个同色棋子，而且这个棋子周围也有一个同色棋子
-		if (m_limit[color][near_x][near_y] == m_inf2 + 1)return false;
+		if (m_limit[color][near_x][near_y] >= m_inf2 + 1)return false;
 	}
 	return true;
 }
@@ -230,37 +231,37 @@ bool board::step_inside(int x, int y) {
 	
 
 	if (selected_color != (m_chess_num + 1) % 2) {
-		cout << "step_inside error:　颜色对不上？？？？" << endl;
+		//cout << "step_inside error:　颜色对不上？？？？" << endl;
 		return 0;
 	}
 
 	CHESS_COLOR color = static_cast<CHESS_COLOR>((m_chess_num + 1) % 2);
-	string c_color;
+	/*string c_color;
 	switch (color) {
 	case WHITE:c_color = "后手"; break;
 	case BLACK:c_color = "先手"; break;
 	case NONE:c_color = "没有"; break;
 	default:c_color = "未知"; break;
-	}
+	}*/
 	//who_step++;
 
 	if (lay(color, x, y)) {
 		m_chess_pos=++m_chess_num;
 		m_chess[m_chess_pos] = data_xytoi(x, y);
 		m_curr_color[x][y] = m_chess_pos;
-		cout << c_color << "方在(" << x << ',' << y << ")下子" << endl;
+		//cout << c_color << "方在(" << x << ',' << y << ")下子" << endl;
 		pre_chess = data_xytoi(x, y);
 		return true;
 	}
 	else {
-		cout << "错误：在(" << x << ',' << y << ")处不能放下" << c_color << "棋子" << endl;
+		//cout << "错误：在(" << x << ',' << y << ")处不能放下" << c_color << "棋子" << endl;
 		return false;
 	}
 }
 
-CHESS_COLOR board::moving_color()
+int board::moving_color()
 {
-	return CHESS_COLOR(selected_color);
+	return (selected_color);
 }
 
 bool board::get_before_color()
@@ -273,35 +274,36 @@ bool board::get_before_color()
 bool board::move_select(int x, int y) {
 
 	if (m_curr_color[x][y] == m_inf || m_curr_color[x][y] == 0) {
-		cout << "move select error :: 这个位置没有棋了？？？？" << endl;
+
+		//cout << "move select error :: 这个位置没有棋了？？？？" << endl;
 		return 0;
 	}
 
 	if (isSelected) {
-		cout << "move select error ::  上次的棋子还没有放下" << endl;
+		//cout << "move select error ::  上次的棋子还没有放下" << endl;
 		return 0;
 	}
 
 	if (m_curr_color[x][y] % 2 != selected_color) {
-		cout << "move select error :: 这个颜色不允许移动" << endl;
+		//cout << "move select error :: 这个颜色不允许移动" << endl;
 		return 0;
 	}
 
 	if (m_curr_color[x][y]) {
-		string c_color;
+		/*string c_color;
 		switch (m_curr_color[x][y]%2) {
 		case WHITE:c_color = "后手"; break;
 		case BLACK:c_color = "先手"; break;
 		case NONE:c_color = "没有"; break;
 		default:c_color = "未知"; break;
-		}
+		}*/
 		//selected_color = m_curr_color[x][y] % 2;
 		m_chess_pos = m_curr_color[x][y];
 		m_curr_color[x][y] = 0;
 		selected_chess = data_xytoi(x, y);
 		isSelected = true;
 		retract(selected_color, x, y);
-		cout << "选择在(" << x << ',' << y << ")的" << c_color << "色棋子移动" << endl;
+		//cout << "选择在(" << x << ',' << y << ")的" << c_color << "色棋子移动" << endl;
 
 
 		
@@ -309,7 +311,7 @@ bool board::move_select(int x, int y) {
 		return true;
 	}
 	else {
-		cout << "错误：在(" << x << ',' << y << ")处没有棋子可供选择！" << endl;
+		//cout << "错误：在(" << x << ',' << y << ")处没有棋子可供选择！" << endl;
 		return false;
 	}
 }
@@ -317,28 +319,28 @@ bool board::move_select(int x, int y) {
 //移棋第二步：在新位置下棋
 bool board::move_step(int x, int y) {
 	if (isSelected) {
-		string c_color;
+		/*string c_color;
 		switch (selected_color) {
 		case WHITE:c_color = "后手"; break;
 		case BLACK:c_color = "先手"; break;
 		case NONE:c_color = "没有"; break;
 		default:c_color = "未知"; break;
-		}
+		}*/
 		if (lay(selected_color, x, y)) {
-			int b_x(0), b_y(0);
-			data_itoxy(selected_chess, b_x, b_y);
+			/*int b_x(0), b_y(0);
+			data_itoxy(selected_chess, b_x, b_y);*/
 
 			if (m_chess_pos == 0) {
-				cout << "move_step error:　位置m_chess_pos出错了，为什么？？" << endl;
+				//cout << "move_step error:　位置m_chess_pos出错了，为什么？？" << endl;
 			}
 			if (m_chess_pos % 2 != selected_color) {
-				cout << "move_step error ::　放的位置和颜色不一样，为什么？？" << endl;
+				//cout << "move_step error ::　放的位置和颜色不一样，为什么？？" << endl;
 			}
 			m_chess[m_chess_pos] = data_xytoi(x, y);
 			m_curr_color[x][y] = m_chess_pos;
 			m_chess_pos = 0;
 			//m_curr_color[b_x][b_y] = 0;
-			cout << c_color << "方把(" << b_x << ',' << b_y << ")移动到(" << x << ',' << y << ')' << endl;
+			//cout << c_color << "方把(" << b_x << ',' << b_y << ")移动到(" << x << ',' << y << ')' << endl;
 			isSelected = false;
 			pre_chess = data_xytoi(x, y);
 			
@@ -353,14 +355,14 @@ bool board::move_step(int x, int y) {
 			return true;
 		}
 		else {
-			int b_x(0), b_y(0);
-			data_itoxy(selected_chess, b_x, b_y);
-			cout << "错误：在(" << b_x << ',' << b_y << ")处不能放下" << c_color << "色棋子，移棋失败" << endl;
+			/*int b_x(0), b_y(0);
+			data_itoxy(pre_chess, b_x, b_y);*/
+			//cout << "错误：在(" << b_x << ',' << b_y << ")处不能放下" << c_color << "色棋子，移棋失败" << endl;
 			return false;
 		}
 	}
 	else {
-		cout << "错误：未选中棋子！" << endl;
+		//cout << "错误：未选中棋子！" << endl;
 		return false;
 	}
 }
@@ -371,28 +373,32 @@ void board::move_cancel()
 
 
 	if (!isSelected) {
-		cout << "move cancel error : 没有选中棋子，怎么放回去???" << endl;
+		//cout << "move cancel error : 没有选中棋子，怎么放回去???" << endl;
 	}
 
 	int x, y;
 
-	data_itoxy(selected_chess,x,y);
+	data_itoxy(selected_chess,x, y);
+
 
 	isSelected = false;
-	if (lay(selected_color, x, y)){
-		string c_color;
+	if (lay(selected_color, x, y)) {
+		m_curr_color[x][y] = m_chess_pos;
+		m_chess[m_chess_pos] = selected_chess;
+		isSelected = false;
+		/*string c_color;
 		switch (selected_color) {
 		case WHITE:c_color = "后手"; break;
 		case BLACK:c_color = "先手"; break;
 		case NONE:c_color = "没有"; break;
 		default:c_color = "未知"; break;
-		}
+		}*/
 
-		cout << c_color << "方把棋子放回到(" << x << ',' << y << ')' << endl;
+		//cout << c_color << "方把棋子放回到(" << x << ',' << y << ')' << endl;
 
 	}
 	else {
-		cout << "出错：不知道为什么放不回去棋子？？？内核有问题" << endl;
+		//cout << "出错：不知道为什么放不回去棋子？？？内核有问题" << endl;
 	}
 
 	//return false;
@@ -402,12 +408,12 @@ void board::move_cancel()
 void board::move_retract_new()
 {
 	if (isSelected) {
-		cout << "move_retract_new error :: 之前的棋子没有放下" << endl;
+		//cout << "move_retract_new error :: 之前的棋子没有放下" << endl;
 		return;
 	}
 
 	if (who_step <= 2 * chess_num) {
-		cout << "move_retract_new error :: 模式不对，上一步是下棋" << endl;
+		//cout << "move_retract_new error :: 模式不对，上一步是下棋" << endl;
 		return;
 	}
 
@@ -428,14 +434,14 @@ void board::move_retract_new()
 		if (!m_before[0].empty())
 			pre_chess = m_before[0].top();
 		else {
-			cout << "move_retract_new error ::  为什么上一步没有棋子" << endl;
+			//cout << "move_retract_new error ::  为什么上一步没有棋子" << endl;
 			return;
 			//	pre_chess = -1;
 		}
 
 		data_itoxy(current, current_x, current_y);
 		if (m_curr_color[current_x][current_y] == m_inf || m_curr_color[current_x][current_y] == 0) {
-			cout << "move_retract_new error ::   这个位置没有棋了？？？？" << endl;
+			//cout << "move_retract_new error ::   这个位置没有棋了？？？？" << endl;
 			return;
 		}
 
@@ -443,10 +449,11 @@ void board::move_retract_new()
 		m_curr_color[current_x][current_y] = 0;
 
 		if (m_chess_pos % 2 != selected_color) {
-			cout << "move_retract_new error ::   这个棋子颜色和位置不一样？？？？" << endl;
+			//cout << "move_retract_new error ::   这个棋子颜色和位置不一样？？？？" << endl;
 		}
 
 		retract(m_chess_pos % 2, current_x, current_y);
+		//cout << "在(" << current_x << ',' << current_y << ")处收回新棋子" << endl;
 	//	isSelected = 1;
 
 	}
@@ -455,7 +462,7 @@ void board::move_retract_new()
 void board::back(int& p1,int& p2)
 {
 	if (m_before[0].empty()){
-		cout << "error::　无棋可悔" << endl;
+		//cout << "error::　无棋可悔" << endl;
 		return;
 	}
 
@@ -480,14 +487,14 @@ void board::back(int& p1,int& p2)
 	m_chess_pos = m_curr_color[cx][cy];
 
 	if (m_chess_pos % 2!=selected_color) {
-		cout << "back error;　颜色不一样？？？" << endl;
+		//cout << "back error;　颜色不一样？？？" << endl;
 		return;
 	}
 
 	m_curr_color[cx][cy] = 0;
 	if (!retract(selected_color, cx, cy))
 	{
-		cout << "back error :：不能移棋？？？" << endl;
+		//cout << "back error :：不能移棋？？？" << endl;
 		return;
 	}
 
@@ -505,10 +512,14 @@ void board::back(int& p1,int& p2)
 
 	else {
 		if (m_chess_pos != m_chess_num) {
-			cout << "error:: 删除的棋子不是最后下的棋子？？" << endl;
+			//cout << "error:: 删除的棋子不是最后下的棋子？？" << endl;
 		}
 		m_chess_num--;
+		int b_x(0), b_y(0);
+		data_itoxy(m_chess[m_chess_pos], b_x, b_y);
+		//cout << "错误：在(" << b_x << ',' << b_y << ")处success" <<endl;
 	}
+	
 }
 
 
@@ -578,7 +589,7 @@ bool board::retract(int color, int x, int y) {
 	for (int i = 0; i < 4; i++) {
 
 		if (m_network[x][y][i].m_pioneer == NULL) {
-			cout << "retract error ::为什么前驱结点是空？？？" << endl;
+			//cout << "retract error ::为什么前驱结点是空？？？" << endl;
 		}
 		m_network[x][y][i].m_pioneer->m_next = m_network[x][y][i].m_next;
 		if (!(m_network[x][y][i].m_next == NULL))
@@ -683,43 +694,43 @@ bool board::judge_success(int color) {
 	return false;
 }
 
-// 某一位为1 表示可以下棋，否则不能下
-unsigned long board::get_all_feasible()
-{
-
-	bool current_feasible[array_size][array_size];
-	memset(current_feasible, 0, sizeof(current_feasible));
-
-	int temp_x, temp_y;
-	for (int i = 1; i <= m_chess_num; i++) {// O(m_chess_num  )=O(20)
-		data_itoxy(i, temp_x, temp_y);
-		current_feasible[temp_x][temp_y] = 1;// 已经有棋子的地方不能下
-		if (i % 2==selected_color) {
-			
-			if (m_limit[selected_color][temp_x][temp_y] == m_inf2 + 1) {//这个棋子附近有一个同色棋子，附近不可以再下同色棋子
-				for (int j = 0; j < 4; j++)
-				{
-					current_feasible[temp_x + m_surround[j][0]][temp_x + m_surround[j][1]] = 1;
-
-				}
-			}
-		}
-		
-	}
-
-	unsigned long ans = 0;
-	for (int y = board_size; y >=1; y--) {
-		for (int x = board_size; x >= 1; x--)
-		{
-			ans >>= 1;
-			if (!current_feasible[x][y] && m_limit[selected_color][x][y] <= 1) {
-				ans |= 1;
-			}
-		}
-	}
-	
-	return ans;
-}
+//// 某一位为1 表示可以下棋，否则不能下
+//unsigned long board::get_all_feasible()
+//{
+//
+//	bool current_feasible[array_size][array_size];
+//	memset(current_feasible, 0, sizeof(current_feasible));
+//
+//	int temp_x, temp_y;
+//	for (int i = 1; i <= m_chess_num; i++) {// O(m_chess_num  )=O(20)
+//		data_itoxy(i, temp_x, temp_y);
+//		current_feasible[temp_x][temp_y] = 1;// 已经有棋子的地方不能下
+//		if (i % 2==selected_color) {
+//			
+//			if (m_limit[selected_color][temp_x][temp_y] == m_inf2 + 1) {//这个棋子附近有一个同色棋子，附近不可以再下同色棋子
+//				for (int j = 0; j < 4; j++)
+//				{
+//					current_feasible[temp_x + m_surround[j][0]][temp_x + m_surround[j][1]] = 1;
+//
+//				}
+//			}
+//		}
+//		
+//	}
+//
+//	unsigned long ans = 0;
+//	for (int y = board_size; y >=1; y--) {
+//		for (int x = board_size; x >= 1; x--)
+//		{
+//			ans >>= 1;
+//			if (!current_feasible[x][y] && m_limit[selected_color][x][y] <= 1) {
+//				ans |= 1;
+//			}
+//		}
+//	}
+//	
+//	return ans;
+//}
 
 // first 表示某一位有没有棋子，second 表示这一位棋子是黑色的
 pair<unsigned long, unsigned long> board::get_current_state()
@@ -738,32 +749,391 @@ pair<unsigned long, unsigned long> board::get_current_state()
 	return pair<unsigned long, unsigned long>(temp_state,temp_color);
 }
 // 简单计算每个点周围的可见点数目
-int board::get_scores(int color)
+//int board::get_scores(int color)
+//{
+//	int scores[2] = { 0,0 };
+//	int temp, x, y;
+//	int total_next;
+//	for (int i = 1; i <=chess_num; i++) {
+//		temp = m_chess[i];
+//		data_itoxy(temp, x, y);
+//		temp = 0;
+//		total_next = 0;
+//		int x1, y1;
+//		for (int i = 0; i < 4; i++)
+//		{
+//			if (m_network[x][y][i].m_pioneer != NULL) {
+//				temp = m_network[x][y][i].m_pioneer->m_index;
+//				data_itoxy(temp, x1, y1);
+//				if (m_curr_color[x1][y1] < m_inf && (m_curr_color[x1][y1] % 2) == (m_curr_color[x][y] % 2)) {
+//					total_next++;
+//				}
+//			}
+//
+//		}
+//
+//		scores[m_curr_color[x][y] % 2] += total_next;
+//	}
+//
+//	return scores[color] - scores[(color + 1) % 2];
+//
+//	//return 0;
+//}
+
+//find back and ahead node at one time to reduce the time cost;
+void board::GetAheadBackStone(int index, int direction, int & index_ahead, int & index_back)
 {
-	int scores[2];
-	int temp, x, y;
-	int total_next;
-	for (int i = 1; i <=chess_num; i++) {
-		temp = m_chess[i];
-		data_itoxy(temp, x, y);
-		temp = 0;
-		total_next = 0;
-		int x1, y1;
-		for (int i = 0; i < 4; i++)
-		{
-			temp = m_network[x][y][i].m_pioneer->m_index;
-			data_itoxy(temp, x1, y1);
-			if (m_curr_color[x1][y1] < m_inf && (m_curr_color[x1][y1] % 2) == (m_curr_color[x][y] % 2)) {
-				total_next++;
-			}
-		}
-
-		scores[m_curr_color[x][y] % 2] += total_next;
+	int x = 0, y = 0;
+	data_itoxy(index, x, y);
+	node * temp = m_head[x][y][direction];
+	while (temp->m_next->m_index != index)
+	{
+		temp = temp->m_next;
 	}
-
-	return scores[color] - scores[(color + 1) % 2];
-
-	//return 0;
+	if (temp->m_next->m_index == index)
+	{
+		index_ahead = -1;//没有前节点；
+	}
+	else
+	{
+		index_ahead = temp->m_index;
+	}
+	temp = temp->m_next->m_next;
+	if (temp == nullptr)
+	{
+		index_back = -1;
+	}
+	else
+	{
+		index_back = temp->m_index;
+	}
 }
 
 
+
+
+//judge whether to be 3-3 situation;
+bool board::WhetherToThr(int index1, int index2)
+{
+	int index1_x = 0, index1_y = 0, index2_x = 0, index2_y = 0;
+	data_itoxy(index1, index1_x, index1_y);
+	data_itoxy(index2, index2_x, index2_y);
+	if (index1_x == index2_x)
+	{
+		if (abs(index1_y - index2_y) == 2)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else if (index1_y == index2_y)
+	{
+		if (abs(index1_x - index2_x) == 2)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else if (abs(index1_x - index2_x) == 2)
+	{
+		if (abs(index1_y - index2_y) == 2)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	return false;
+}
+
+//Evaluate the situation;
+double board::get_scores_inside(int color)
+{
+	//棋局总分；
+	double all_score = 0;
+	//评价棋子的个数；
+	int number_evaluated = 0;
+	//judge m_chess_num to be an even or an odd;
+	if ((m_chess_num & 1) == 1)
+	{
+		if (color == WHITE)
+		{
+			number_evaluated = (m_chess_num + 1) / 2;
+		}
+		else
+		{
+			number_evaluated = (m_chess_num - 1) / 2;
+		}
+	}
+	else
+	{
+		number_evaluated = m_chess_num / 2;
+	}
+	//虽然for循环是遍历计算每个白棋的单独评分，
+	//但是基于双向链表的查找，加上棋子的数目并不多，
+	//所以他们的时间复杂度并不高:    O（stone_number*size*size/2）
+	//size是棋盘的边长
+	for (int i = 0; i < number_evaluated; ++i)
+	{
+		//单个评分；
+		double self_score = 0;
+		//记录三三边的个数；
+		int number_thr_edge = 0;
+		//记录八个方向中被阻挡的方向个数；可能为分数是因为每个方向完全阻死的可能性很小；
+		double  number_blocked = 0.0;
+		//确定评价点的坐标；
+		int point_evaluated = 0;
+		if (color == WHITE)
+		{
+			point_evaluated = 2 + 2 * i;
+		}
+		else
+		{
+			point_evaluated = 1 + 2 * i;
+		}
+		int index_evaluated = m_chess[point_evaluated];
+		//四个大方向的遍历；
+		for (int direction = 0; direction < 4; ++direction)
+		{
+			//通过双向链表得到第i个棋子的前面的棋子
+			int ahead_stone = 0, back_stone = 0;
+			GetAheadBackStone(index_evaluated, direction, ahead_stone, back_stone);
+			if (ahead_stone != -1)
+			{
+				int ahead_stone_x = 0, ahead_stone_y = 0;
+				data_itoxy(ahead_stone, ahead_stone_x, ahead_stone_y);
+				//如果同色；
+				if ((m_curr_color[ahead_stone_x][ahead_stone_y] % 2) == color)
+				{
+					//加上基准分1分，因为只要是相连的话就有了一定的优势；
+					self_score += 1.0;
+					//如果做相邻的棋子与之构成“三三”的一部分；评分应该高出很多，并且做一个记录；
+					if (WhetherToThr(ahead_stone, index_evaluated))
+					{
+						self_score += 5.0;
+						++number_thr_edge;
+					}
+					//没有形成3-3时；距离越长，评分越少，因为距离长的时候容易被阻断；
+					else
+					{
+						int x_evaluated = 0, y_evaluated = 0;
+						data_itoxy(index_evaluated, x_evaluated, y_evaluated);
+						int dis = abs(x_evaluated - ahead_stone_x) + abs(y_evaluated - ahead_stone_y);
+						//为了让棋子朝向自己对面的的特区方向；
+						if (y_evaluated - ahead_stone_y > 0)
+						{
+							//更加朝向自己的特区方向；
+							self_score += 10.0 / (dis + 1.0);
+						}
+						else
+						{
+							self_score += 5.0 / (dis + 1.0);
+						}
+						
+					}
+				}
+				//异色；距离越远影响越小；
+				else
+				{
+					int x_evaluated = 0, y_evaluated = 0;
+					data_itoxy(index_evaluated, x_evaluated, y_evaluated);
+					int dis = abs(x_evaluated - ahead_stone_x) + abs(y_evaluated - ahead_stone_y);
+					//阻隔的力度更大；因为朝向了自己的特区方向被挡住；
+					if (y_evaluated - ahead_stone_y > 0)
+					{
+						number_blocked += dis / 8.0;
+					}
+					else
+					{
+						number_blocked += (dis / 16.0);
+					}
+	
+				}
+			}
+
+
+			//第i个棋子后面的棋子；
+			if (back_stone != -1)
+			{
+				int back_stone_x = 0, back_stone_y = 0;
+				data_itoxy(back_stone, back_stone_x, back_stone_y);
+				//如果同色；
+				if ((m_curr_color[back_stone_x][back_stone_y] % 2) == color)
+				{
+					//加上基准分1分，因为只要是相连的话就有了一定的优势；
+					self_score += 1.0;
+					//如果做相邻的棋子与之构成“三三”的一部分；评分应该高出很多，并且做一个记录；
+					if (WhetherToThr(back_stone, index_evaluated))
+					{
+						self_score += 5.0;
+						++number_thr_edge;
+					}
+					//没有形成3-3时；距离越长，评分越少，因为距离长的时候容易被阻断；
+					else
+					{
+						int x_evaluated = 0, y_evaluated = 0;
+						data_itoxy(index_evaluated, x_evaluated, y_evaluated);
+						int dis = abs(x_evaluated - back_stone_x) + abs(y_evaluated - back_stone_y);
+						//为了让棋子朝向自己对面的的特区方向；
+						if (y_evaluated - back_stone_y > 0)
+						{
+							//更加朝向自己的特区方向；
+							self_score += 10.0 / (dis + 1.0);
+						}
+						else
+						{
+							self_score += 5.0 / (dis + 1.0);
+						}
+					}
+				}
+				//异色；距离越远影响越小；
+				else
+				{
+					int x_evaluated = 0, y_evaluated = 0;
+					data_itoxy(index_evaluated, x_evaluated, y_evaluated);
+					int dis = abs(x_evaluated - back_stone_x) + abs(y_evaluated - back_stone_y);
+
+					//阻隔的力度更大；因为朝向了自己的特区方向被挡住；
+					if (y_evaluated - back_stone_y > 0)
+					{
+						number_blocked += dis / 8.0;
+					}
+					else
+					{
+						number_blocked += (dis / 16.0);
+					}
+				}
+			}
+		}
+		//下面考虑单个点的评分；形成三三
+		if (number_thr_edge >= 2)
+		{
+			self_score += 20;
+		}
+		//number_blocked+1是考虑到有很多棋子周很多限制，不能下;例如：位于特区周围的时候，聚群的时候；（这里只是折中，没有仔细判断，所以只是加一）
+		else
+		{
+			self_score *= (number_blocked + 1.0) / 8.0;
+		}
+		all_score += self_score;
+
+
+	}
+
+	double score_2 = 0;
+
+	//看他们是否横向相连；
+	for (auto i = 1; i<=number_evaluated; ++i)
+	{
+
+		int index_evaluated = m_chess[2*i-1];
+		int ahead_stone = 0, back_stone = 0;
+		bool IsConnected = false;
+		for (int j = 0; j < 4; ++j)
+		{
+			GetAheadBackStone(index_evaluated, j, ahead_stone, back_stone);
+			int x_ahead = 0, y_ahead = 0;
+			int x_evaluated = 0, y_evaluated = 0;
+			//判断前驱是否是行相连；
+			if (ahead_stone != -1)
+			{
+				data_itoxy(ahead_stone, x_ahead, y_ahead);
+			}
+			data_itoxy(index_evaluated, x_evaluated, y_evaluated);
+			if (ahead_stone != -1 && y_evaluated != y_ahead&&m_curr_color[x_ahead][y_ahead]==color)
+			{
+				IsConnected = true;
+				break;
+			}
+			int x_back = 0, y_back = 0;
+			//判断后继是否是行相连；
+			if (back_stone != -1)
+			{
+				data_itoxy(back_stone, x_back, y_back);
+			}
+			data_itoxy(index_evaluated, x_evaluated, y_evaluated);
+			if (back_stone != -1 && y_evaluated != y_back&&m_curr_color[x_back][y_back] == color)
+			{
+				IsConnected = true;
+				break;
+			}
+		}
+		if (IsConnected)
+		{
+			score_2 += 3.0;
+		}
+
+	}
+	all_score += score_2;
+	return all_score;
+}
+
+
+// 某一位为1 表示可以下棋，否则不能下
+void board::cal_all_feasible()
+{
+
+	bool current_feasible[array_size][array_size];
+	memset(current_feasible, 0, sizeof(current_feasible));
+
+	int temp_x, temp_y;
+	for (int i = 1; i <= m_chess_num; i++) {// O(m_chess_num  )=O(20)
+		data_itoxy(m_chess[i], temp_x, temp_y);
+		//	current_feasible[temp_x][temp_y] = 1;// 已经有棋子的地方不能下
+		if (i % 2 == selected_color) {
+
+			if (m_limit[selected_color][temp_x][temp_y] >= m_inf2 + 1) {//这个棋子附近有一个同色棋子，附近不可以再下同色棋子
+				for (int j = 0; j < dir_count; j++)
+				{
+					current_feasible[temp_x + m_surround[j][0]][temp_y + m_surround[j][1]] = 1;
+
+				}
+			}
+		}
+
+	}
+//	m_feasible.assign(board_size*board_size, 0);
+	int x, y;
+	//bool no = 0;
+	for (int i = 0; i <board_size*board_size; i++) {
+		m_feasible[i] = 0;
+		real_itoxy(i, x, y);
+		real2data(x, y);
+
+	
+
+		if (m_curr_color[x][y]) {
+		}
+
+		else if (m_limit[selected_color][x][y] >= m_inf) {
+			//	no = 0;
+		}
+		else if (m_limit[selected_color][x][y] >= 2) {
+
+		}
+		else if (!current_feasible[x][y] /*&& m_limit[selected_color][x][y]<m_inf&& m_curr_color[x][y]==0*/) {
+			//ans |= 1;
+			//cout << "(" << x << "," << y << ")";
+			feasible(selected_color, x, y);
+			//	no = 1;
+			m_feasible[i] = 1;
+		}
+		else m_feasible[i] = 0;
+
+
+	}
+
+	//cout << endl;
+	int index;
+
+
+
+}

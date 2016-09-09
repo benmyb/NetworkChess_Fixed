@@ -16,8 +16,8 @@ const int array_size = 10;	// 棋盘大小,扩大棋盘大小防止越界,减少越界判断
 const int dir_count = 8;	// 8方向联通
 const int chess_num = 10;	// 一方的棋子数
 const int chess_need_to_win = 6;//成功网络中所需棋子数
-const int m_inf = 0x3f3f3f3f;	// 设置无穷值，便于设置特殊值
-const int m_inf2 = 0x1f1f1f1f;	// 设置第二个特殊值，表示特殊情况
+const int m_inf2 = 0x3f3f3f3f;	// 设置无穷值，便于设置特殊值
+const int m_inf = 0x1f1f1f1f;	// 设置第二个特殊值，表示特殊情况
 
 const double double_inf = 1e9 + 10;
 //白棋连通上下  黑棋连通左右 
@@ -58,7 +58,7 @@ private:
 	int m_curr_color[array_size][array_size];
 	int m_limit[2][array_size][array_size];	// m_limit[0][][] 表示白棋的限制域， m_limit[1][][] 表示黑棋的限制域
 	int m_surround[dir_count][2] = { { -1,1 },{ 0,1 },{ 1,1 },{ 1,0 },{ -1,0 },{ -1,-1 },{ 0,-1 },{ 1,-1 } };	 //临近域
-	node m_network[array_size][array_size][4];	//每个棋子一个节点
+	//node m_network[array_size][array_size][4];	//每个棋子一个节点
 	node * m_head[array_size][array_size][4];// 存放四个方向的棋子组成的双向链表的头指针
 
 
@@ -138,7 +138,7 @@ public:
 	int m_chess_pos;// 表示应该放在m_chess 的哪个位置
 
 
-
+	int GetColor(int x, int y)const { return m_curr_color[x][y]; }
 
 	board();
 
@@ -164,9 +164,21 @@ public:
 	
 	//界面注意判断当前棋子颜色
 	// 现在可以移动或下的棋子的颜色 1 表示先手棋，0 表示后手棋
-	CHESS_COLOR moving_color();
+	int moving_color();
 
 	bool get_before_color();
+
+
+	vector<bool> m_feasible;
+
+
+
+	// 某一位为1 表示可以下棋，否则不能下 大小为 0-63
+	void cal_all_feasible();
+
+	vector<bool> & get_all_feasible() {
+		return m_feasible;
+	}
 
 
 	// 判断拿着一个棋子
@@ -198,19 +210,30 @@ public:
 
 
 
-	// 某一位为1 表示可以下棋，否则不能下 大小为 0-63
-	unsigned long  get_all_feasible();
+	//// 某一位为1 表示可以下棋，否则不能下 大小为 0-63
+	//unsigned long  get_all_feasible();
 
 	// first 表示某一位有没有棋子，second 表示这一位棋子是黑色的
 	pair<unsigned long, unsigned long> get_current_state();
 
 
 	// 简单计算每个点周围的可见点数目 
-	int  get_scores(int color);
+	/*int  get_scores(int color);*/
+	double get_scores_inside(int color);
 	
+	double get_scores(int color) {
+		return get_scores_inside(color) - get_scores_inside((color + 1) % 2);
+	}
+
 	int who_turn() { return who_step; }
 
 	int getselect() { return selected_chess; }
+
+	node m_network[array_size][array_size][4];	//每个棋子一个节点
+
+
+	void GetAheadBackStone(int index, int direction, int & index_ahead, int & index_back);
+	bool WhetherToThr(int indexq, int index2);
 
 };
 #endif

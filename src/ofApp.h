@@ -57,6 +57,8 @@ private:
 		bool m_isReset = false;
 		bool m_topFirst = true;
 		bool m_istopturn = m_topFirst;
+		bool m_isFin = false;
+		bool m_timeForComputer = m_istopturn;
 
 		ofImage m_chessboard_jpg;
 		ofImage wood;

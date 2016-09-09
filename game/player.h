@@ -18,6 +18,8 @@ protected:
 	unsigned m_wins = 0;
 	unsigned m_loses = 0;	
 public:
+	int m_color;// 我的棋子是什么颜色的？？？
+	int m_level=4;// 难度等级
 	player() {}
 	void init();
 	void name_reset(const string& name);
@@ -36,7 +38,7 @@ public:
 	ofxAssimpModelLoader& hand() { return m_hand; }
 	bool ishuman() { return m_ishuman; }
 
-
+	virtual bool step(int & p1, int & p2) { return 0; }
 };
 
 #endif // !PLAYER_H

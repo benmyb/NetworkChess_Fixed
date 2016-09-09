@@ -11,7 +11,7 @@ public:
 		int index((rand() % 37) + 1);
 		m_face.loadImage("/faces/human/" + ofToString(index) + ".jpg");
 		m_ishuman = true;
-		m_hand.loadModel("human_hand.stl");
+		m_hand.loadModel("robot_hand.obj");
 		m_hand.setScale(1.8, 1.6, 1.6);
 		m_bowl.loadModel("bowl.obj");
 		m_bowl.setScale(0.5, 0.5, 0.5);

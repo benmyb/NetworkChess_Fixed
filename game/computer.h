@@ -3,7 +3,7 @@
 #define COMPUTER_H
 
 #include "player.h"
-
+#include<random>
 typedef int mm;
 
 
@@ -26,16 +26,30 @@ struct point {
 
 
 class computer :public player {
-	computer(){};
+	default_random_engine  m_e;
+
+	uniform_real_distribution<double> m_u_double;
+
+
+	computer() :m_u_double(0.0, 1.0) { };
+
+
+
 
 
 	int m_node_num = 0;
 
-	priority_queue<point> m_possible;
+	//priority_queue<point> m_possible;
+	vector<point> m_possible;
+
+	double m_max = 0;
+
+
 
 	double alpha_beta(int depth, double alpha, double beta, int father, int color, int p1, int p2);
 
 	void search_init() {
+		m_max = -m_inf2;
 		m_node_num = 0;
 		m_tree.clear();
 		m_state.clear();
@@ -55,9 +69,7 @@ public:
 	pair<unsigned long, unsigned long> m_current_state;
 	
 
-	int m_color;// 我的棋子是什么颜色的？？？
-
-	int m_level;// 难度等级
+	
 
 	computer(board & ma) :player(),m_manager(&ma) {
 		m_name = "computer";
@@ -78,7 +90,7 @@ public:
 */
 	// 表示计算机的下一步，包括下棋和移棋，p2=0表示下棋  否则是移棋
 	// 下棋： p1表示当前下的位置  移棋: p1 表示当前位置 p2 表示移动前的位置
-	void step(int & p1,int & p2);
+	bool step(int & p1,int & p2);
 
 
 
